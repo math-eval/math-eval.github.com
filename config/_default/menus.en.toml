@@ -1,0 +1,27 @@
+############# English navigation ##############
+
+# main menu
+[[main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[main]]
+name = "Leaderboard"
+url = "leaderboard/"
+weight = 2
+
+[[main]]
+name = "Datasets"
+url = "dataset/"
+weight = 3
+
+[[main]]
+name = "Discussions"
+url = "https://github.com/math-eval/MathEval/discussions"
+weight = 4
+
+[[main]]
+name = "Contact"
+url = "/#contact"
+weight = 5

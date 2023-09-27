@@ -1,0 +1,146 @@
+- id: home
+  translation: Home
+
+- id: read_more
+  translation: Read More
+
+- id: send
+  translation: Send
+
+- id: related_posts
+  translation: Related Posts
+
+- id: categories
+  translation: Categories
+
+- id: tags
+  translation: Tags
+
+- id: toc
+  translation: Table of Contents
+
+- id: share
+  translation: Share
+
+- id: search_input_placeholder
+  translation: Search Post ...
+
+- id: no_results_for
+  translation: No results for
+
+- id: empty_search_results_placeholder
+  translation: Type something to search..
+
+- id: website
+  translation: Website
+
+- id: dataset_categories
+  translation: Ability
+
+- id: navigation_button_label
+  translation: Evaluation
+
+- id: leaderboard_name
+  translation: Model
+
+- id: leaderboard_date
+  translation: Date
+
+- id: leaderboard_params
+  translation: Parameters
+
+- id: leaderboard_average
+  translation: Average
+
+- id: leaderboard_arithmetics
+  translation: Average
+
+- id: leaderboard_math_world_problems
+  translation: Average
+
+- id: api_type_name
+  translation: Via API
+
+- id: api_type_desc
+  translation: Encapsulate model capabilities into an HTTP interface and provide corresponding API documentation.
+
+- id: model_type_name
+  translation: Via Model Repository
+
+- id: model_type_desc
+  translation: Provide an open-source model repository and user documentation, such as GitHub, Hugging Face Model repository
+
+- id: model_name
+  translation: Model Name
+
+- id: model_placeholder
+  translation: Please enter model name
+
+- id: team_name
+  translation: Organization/Team
+
+- id: team_placeholder
+  translation: Please enter organization/team
+
+- id: parameter_name
+  translation: Parameters (in billions)
+
+- id: parameter_placeholder
+  translation: Please enter parameters
+
+- id: api_endpoint_name
+  translation: Model API Endpoint
+
+- id: api_endpoint_placeholder
+  translation: Please enter API Endpoint URL
+
+- id: api_doc_name
+  translation: Model API Documentation
+
+- id: api_doc_placeholder
+  translation: Please enter API documentation link
+
+- id: website_url_name
+  translation: GitHub/Website
+
+- id: website_url_placeholder
+  translation: Please enter model repository url
+
+- id: repository_url_name
+  translation: Model Repository URL
+
+- id: repository_url_placeholder
+  translation: Please enter model repository URL
+
+- id: model_desc
+  translation: Model Description
+
+- id: model_desc_placeholder
+  translation: Please enter model description
+
+- id: email_name
+  translation: Email
+
+- id: email_placeholder
+  translation: Please enter email address
+
+- id: phone_name
+  translation: Phone
+
+- id: phone_placeholder
+  translation: Please enter phone number
+
+- id: result_publish_name
+  translation: Public Evaluation Result
+
+- id: result_publish
+  translation: Public
+
+- id: result_private
+  translation: Private
+
+- id: submit_button_name
+  translation: Submit
+
+- id: all
+  translation: All
