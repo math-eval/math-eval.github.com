@@ -75,17 +75,29 @@ model:
       team: Shanghai Artificial Intelligence Laboratory、SenseTime、Chinese University of Hong Kong、Fudan University、Shanghai Jiao Tong University
       link: https://huggingface.co/internlm/internlm-7b
 
+    - title: InternLM-20B
+      team: Shanghai Artificial Intelligence Laboratory、SenseTime、Chinese University of Hong Kong、Fudan University、Shanghai Jiao Tong University
+      link: https://internlm.org/
+
+    - title: InternLM-chat-20B
+      team: Shanghai Artificial Intelligence Laboratory、SenseTime、Chinese University of Hong Kong、Fudan University、Shanghai Jiao Tong University
+      link: https://internlm.org/
+
     - title: MathGPT
       team: TAL Education Group
       link: https://www.mathgpt.com/
 
     - title: Qwen-7B
       team: Aliyun
-      link: https://huggingface.co/Qwen/Qwen-7B
+      link: https://github.com/QwenLM/Qwen
+    
+    - title: Qwen-14B
+      team: Aliyun
+      link: https://github.com/QwenLM/Qwen
 
     - title: Qwen-7B-Chat
       team: Aliyun
-      link: https://huggingface.co/tangger/Qwen-7B-Chat
+      link: https://github.com/QwenLM/Qwen
 
     - title: WizardMath-13B-V1.0
       team: Microsoft, Chinese Academy of Sciences
@@ -106,6 +118,18 @@ model:
     - title: 讯飞星火(v2.0)
       team: iFLYTEK Co., Ltd.
       link: https://xinghuo.xfyun.cn/
+
+    - title: MammoTH-70B
+      team: University of Waterloo, Ohio State University, Hong Kong University of Science and Technology, University of Edinburgh
+      link: https://tiger-ai-lab.github.io/MAmmoTH/
+
+    - title: GAIRMath-Abel-70B
+      team: Generative Artificial Intelligence Research Lab (GAIR), Shanghai Jiaotong University
+      link: https://gair-nlp.github.io/abel/
+
+    - title: Llama-2-Qlora
+      team: AICE Lab, University of Florida
+      link: https://huggingface.co/uf-aice-lab/Llama-2-QLoRA
 
 # Dataset
 dataset:

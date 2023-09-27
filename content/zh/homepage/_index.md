@@ -72,8 +72,16 @@ model:
       link: https://huggingface.co/baichuan-inc/Baichuan2-13B-Base
 
     - title: InternLM-7B
-      team: 上海人工智能实验室（上海AI实验室）、商汤科技联合香港中文大学、复旦大学及上海交通大学发布
+      team: 上海人工智能实验室（上海AI实验室）、商汤科技、香港中文大学、复旦大学、上海交通大学发布
       link: https://huggingface.co/internlm/internlm-7b
+
+    - title: InternLM-20B
+      team: 上海人工智能实验室（上海AI实验室）、商汤科技、香港中文大学、复旦大学、上海交通大学发布
+      link: https://internlm.org/
+
+    - title: InternLM-chat-20B
+      team: 上海人工智能实验室（上海AI实验室）、商汤科技、香港中文大学、复旦大学、上海交通大学发布
+      link: https://internlm.org/
 
     - title: MathGPT
       team: 好未来教育集团
@@ -81,11 +89,15 @@ model:
 
     - title: Qwen-7B
       team: 阿里云
-      link: https://huggingface.co/Qwen/Qwen-7B
+      link: https://github.com/QwenLM/Qwen
+
+    - title: Qwen-14B
+      team: 阿里云
+      link: https://github.com/QwenLM/Qwen
 
     - title: Qwen-7B-Chat
       team: 阿里云
-      link: https://huggingface.co/tangger/Qwen-7B-Chat
+      link: https://github.com/QwenLM/Qwen
 
     - title: WizardMath-13B-V1.0
       team: 微软、中科院
@@ -106,6 +118,18 @@ model:
     - title: 讯飞星火(v2.0)
       team: 科大讯飞
       link: https://xinghuo.xfyun.cn/
+
+    - title: MammoTH-70B
+      team: 滑铁卢大学、俄亥俄州立大学、香港科技大学、爱丁堡大学
+      link: https://tiger-ai-lab.github.io/MAmmoTH/
+
+    - title: GAIRMath-Abel-70B
+      team: 上海交通大学GAIR（生成式人工智能研究组）团队
+      link: https://gair-nlp.github.io/abel/
+
+    - title: Llama-2-Qlora
+      team: 佛罗里达大学AICE实验室
+      link: https://huggingface.co/uf-aice-lab/Llama-2-QLoRA
 
 # Dataset
 dataset:
