@@ -118,15 +118,15 @@
           </div>
           <div class="flex mb-2">
             <div class="w-[55px] font-bold">说明1：</div>
-            <div class="flex-1">对于每一道数学题，我们会将一句简单的“解题指令”与题干本身进行拼接，作为大模型输入，让其进行推理和解题。详情点击<a href="https://github.com/math-eval/MathEval/blob/main/eval_prompt.md" target="_blank" class="text-primary hover:underline hover:underline-offset-2">【这里】<i class="fa-solid fa-up-right-from-square text-xs"></i></a></div>
+            <div class="flex-1">我们将一句简单的“解题指令”与题干本身进行拼接，作为输入，让大模型进行推理和解题。<a href="https://github.com/math-eval/MathEval/blob/main/eval_prompt.md" target="_blank" class="text-primary hover:underline hover:underline-offset-2">【详情】<i class="fa-solid fa-up-right-from-square text-xs"></i></a></div>
           </div>
           <div class="flex mb-2">
-            <div class="w-[55px] font-bold">指标2：</div>
-            <div class="flex-1">对于大模型每个题的解答结果，我们用统一正则表达式提取该问题的模型预测的答案，并将该答案与标准答案进行比对，从而计算正确率。所有正确率的计算全部自动化，没有经过人工核验。上述所使用的正则表达式详情点击<a href="https://github.com/math-eval/MathEval/blob/main/extract_res_regex.md" target="_blank" class="text-primary hover:underline hover:underline-offset-2">【这里】<i class="fa-solid fa-up-right-from-square text-xs"></i></a></div>
+            <div class="w-[55px] font-bold">说明2：</div>
+            <div class="flex-1">我们用统一正则表达式提取模型预测答案，并将该答案与标准答案进行比对，从而计算正确率。此处无人工核验环节。<a href="https://github.com/math-eval/MathEval/blob/main/extract_res_regex.md" target="_blank" class="text-primary hover:underline hover:underline-offset-2">【详情】<i class="fa-solid fa-up-right-from-square text-xs"></i></a></div>
           </div>
           <div class="flex">
-            <div class="w-[55px] font-bold">指标3：</div>
-            <div class="flex-1">对于MMLU(math)、C-eval(math)等选择题数据集，在判断正确答案的时候，我们采用（a）直接生成答案；和（b）依据困惑度进行选项预测的两种方式进行实验，最终测评结果选择两者中较好的，作为下列榜单中的评测结果。</div>
+            <div class="w-[55px] font-bold">说明3：</div>
+            <div class="flex-1">对于MMLU(math)、C-eval(math)等选择题，我们同时用直接生成答案和依据困惑度进行选项预测两种方式进行实验，并用较好结果作为榜单中的评测结果。</div>
           </div>
         </div>
         {{ else }}
@@ -136,15 +136,15 @@
           </div>
           <div class="flex mb-2">
             <div class="w-[55px] font-bold">Note 1:</div>
-            <div class="flex-1">For each math question, we will concatenate a simple "solution instruction" with the question as the input to the large model for it to infer and solve the question. For more details, click <a href="https://github.com/math-eval/MathEval/blob/main/eval_prompt.md" target="_blank" class="text-primary hover:underline hover:underline-offset-2">[here]<i class="fa-solid fa-up-right-from-square text-xs ml-1"></i></a>.</div>
+            <div class="flex-1">We will concatenate a simple "solution instruction" with the question as the input to the large model for it to infer and solve the question. <a href="https://github.com/math-eval/MathEval/blob/main/eval_prompt.md" target="_blank" class="text-primary hover:underline hover:underline-offset-2">[Details]<i class="fa-solid fa-up-right-from-square text-xs ml-1"></i></a></div>
           </div>
           <div class="flex mb-2">
             <div class="w-[55px] font-bold">Note 2:</div>
-            <div class="flex-1">For the answer result of each question by the large model, we use a unified regular expression to extract the model's predicted answer for the question, and compare this answer with the standard answer to calculate the accuracy. All accuracy calculations are automated and have not been manually verified. For details of the regular expression used above, click <a href="https://github.com/math-eval/MathEval/blob/main/extract_res_regex.md" target="_blank" class="text-primary hover:underline hover:underline-offset-2">[here]<i class="fa-solid fa-up-right-from-square text-xs ml-1"></i></a></div>
+            <div class="flex-1">We use a unified regular expression to extract the model's predicted answer for the question, and compare this answer with the standard answer to calculate the accuracy. All accuracy calculations are automated and have not been manually verified. <a href="https://github.com/math-eval/MathEval/blob/main/extract_res_regex.md" target="_blank" class="text-primary hover:underline hover:underline-offset-2">[Details]<i class="fa-solid fa-up-right-from-square text-xs ml-1"></i></a></div>
           </div>
           <div class="flex">
             <div class="w-[55px] font-bold">Note 3:</div>
-            <div class="flex-1">For multiple-choice question datasets such as MMLU(math) and C-eval(math), when determining the correct answer, we use (a) direct answer generation; and (b) option prediction based on perplexity for experimentation. The better of the two final evaluation results is selected as the evaluation result in the leaderboard below.</div>
+            <div class="flex-1">For multiple-choice questions such as MMLU(math) and C-eval(math), we conducted experiments in two ways: directly generating answers and predicting options based on perplexity. The better results are used as the evaluation results in the leaderboard.</div>
           </div>
         </div>
         {{ end }}
