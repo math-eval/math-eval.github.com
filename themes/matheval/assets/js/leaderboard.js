@@ -10,37 +10,34 @@ import fewShotData from "data/few.json";
 
   const filterConfig = {
     // 中文数据集
-    cn: ['HMWP', 'Arith30K', 'SCQ5k-CN', 'GAOKAO-Math', 'CMMLU-Math', 'C-eval-Math', 'Math23k', 'Ape210K', 'Big-Bench-Hard-Math', 'AGIEval'],
+    cn: ['hmwp', 'scq_ch', 'GAOKAO-BENCH', 'cmmlu', 'math23k', 'ape210k', 'BBH', 'AGIEval'],
     // 英文数据集
-    en: ['GSM8K', 'MATH', 'MMLU-Math', 'svamp', 'math401-llm', 'DRAW1K', 'Dolphin1878', 'Arith30K', 'SCQ5K-EN', 'mawps', 'asdiv-a', 'MathQA', 'Big-Bench-Math', 'Big-Bench-Hard-Math'],
+    en: ['GSM8K', 'math', 'mmlu', 'svamp', 'math401', 'draw', 'dolphin1878', 'scq_en', 'mawps', 'asdiv-a', 'MathQA', 'BBH'],
     // 应用题
-    math_world_problems: ['GSM8K', 'MATH', 'MMLU-Math', 'svamp', 'DRAW1K', 'HMWP', 'Dolphin1878', 'SCQ5K-EN', 'SCQ5k-CN', 'mawps', 'GAOKAO-Math', 'asdiv-a', 'CMMLU-Math', 'C-eval-Math', 'MathQA', 'Math23k', 'Ape210K', 'AGIEval'],
+    math_world_problems: ['GSM8K', 'math', 'mmlu', 'svamp', 'draw', 'hmwp', 'dolphin1878', 'scq_en', 'scq_ch', 'mawps', 'GAOKAO-BENCH', 'asdiv-a', 'cmmlu', 'MathQA', 'math23k', 'ape210k', 'AGIEval'],
     // 算术
-    arithmetics: ['math401-llm', 'Arith30K', 'Big-Bench-Math', 'Big-Bench-Hard-Math'],
+    arithmetics: ['math401', 'BBH'],
   }
 
   const datasetColumn = [
-    { field: 'Arith30K', title: 'Arith30K', width: 90, align: 'center', sortable: true, visible: true },
-    { field: 'SCQ5K-EN', title: 'TAL-SCQ5K-EN', width: 140, align: 'center', sortable: true, visible: true },
-    { field: 'SCQ5k-CN', title: 'TAL-SCQ5K-CN', width: 140, align: 'center', sortable: true, visible: true },
+    { field: 'scq_en', title: 'TAL-SCQ5K-EN', width: 140, align: 'center', sortable: true, visible: true },
+    { field: 'scq_ch', title: 'TAL-SCQ5K-CN', width: 140, align: 'center', sortable: true, visible: true },
     { field: 'mawps', title: 'MAWPS', width: 80, align: 'center', sortable: true, visible: true },
-    { field: 'GAOKAO-Math', title: 'GAOKAO(Math)', width: 140, align: 'center', sortable: true, visible: true },
+    { field: 'GAOKAO-BENCH', title: 'GAOKAO(Math)', width: 140, align: 'center', sortable: true, visible: true },
     { field: 'asdiv-a', title: 'ASDiv-A', width: 80, align: 'center', sortable: true, visible: true },
-    { field: 'CMMLU-Math', title: 'CMMLU(Math)', width: 130, align: 'center', sortable: true, visible: true },
-    { field: 'MATH', title: 'MATH', width: 80, align: 'center', sortable: true, visible: true },
-    { field: 'GSM8k', title: 'GSM8K', width: 80, align: 'center', sortable: true, visible: true },
-    { field: 'MMLU-Math', title: 'MMLU(Math)', width: 140, align: 'center', sortable: true, visible: true },
+    { field: 'cmmlu', title: 'CMMLU(Math)', width: 130, align: 'center', sortable: true, visible: true },
+    { field: 'math', title: 'MATH', width: 80, align: 'center', sortable: true, visible: true },
+    { field: 'GSM8K', title: 'GSM8K', width: 80, align: 'center', sortable: true, visible: true },
+    { field: 'mmlu', title: 'MMLU(Math)', width: 140, align: 'center', sortable: true, visible: true },
     { field: 'svamp', title: 'SVAMP', width: 80, align: 'center', sortable: true, visible: true },
-    { field: 'math401-llm', title: 'math401-llm', width: 120, align: 'center', sortable: true, visible: true },
-    { field: 'DRAW1K', title: 'DRAW1K', width: 100, align: 'center', sortable: true, visible: true },
-    { field: 'HMWP', title: 'HMWP', width: 80, align: 'center', sortable: true, visible: true },
-    { field: 'Dolphin1878', title: 'Dolphin1878', width: 110, align: 'center', sortable: true, visible: true },
-    { field: 'C-eval-Math', title: 'C-eval(Math)', width: 120, align: 'center', sortable: true, visible: true },
+    { field: 'math401', title: 'math401-llm', width: 120, align: 'center', sortable: true, visible: true },
+    { field: 'draw', title: 'DRAW1K', width: 100, align: 'center', sortable: true, visible: true },
+    { field: 'hmwp', title: 'HMWP', width: 80, align: 'center', sortable: true, visible: true },
+    { field: 'dolphin1878', title: 'Dolphin1878', width: 110, align: 'center', sortable: true, visible: true },
     { field: 'MathQA', title: 'MathQA', width: 90, align: 'center', sortable: true, visible: true },
-    { field: 'Math23k', title: 'Math23K', width: 90, align: 'center', sortable: true, visible: true },
-    { field: 'Ape210K', title: 'Ape210K', width: 90, align: 'center', sortable: true, visible: true },
-    { field: 'Big-Bench-Math', title: 'Big-Bench(Math)', width: 140, align: 'center', sortable: true, visible: true },
-    { field: 'Big-Bench-Hard-Math', title: 'Big-Bench-Hard(Math)', width: 180, align: 'center', sortable: true, visible: true },
+    { field: 'math23k', title: 'Math23K', width: 90, align: 'center', sortable: true, visible: true },
+    { field: 'ape210k', title: 'Ape210K', width: 90, align: 'center', sortable: true, visible: true },
+    { field: 'BBH', title: 'Big-Bench-Hard(Math)', width: 180, align: 'center', sortable: true, visible: true },
     { field: 'AGIEval', title: 'AGIEval', width: 90, align: 'center', sortable: true, visible: true },
   ]
 
@@ -53,9 +50,13 @@ import fewShotData from "data/few.json";
         lanyType = 'en';
       }
 
+      const abilityAverageName = lanyType === 'zh' ? '能力平均' : 'Ability average';
       const overallAverageName = lanyType === 'zh' ? '整体平均' : 'Overall average';
       const weightedAverageName = lanyType === 'zh' ? '加权平均' : 'Weighted average';
       const cumulativeRankingName = lanyType === 'zh' ? '累加排位' : 'Cumulative ranking';
+      const abilityAverageTips = {
+        content: lanyType === 'zh' ? '分别计算模型在应用题和算数类型各个数据集上的平均准确率，然后取两者的平均值作为最终能力平均准确率。该数值越大代表模型性能越好。' : 'Calculate the average accuracy of the model on various datasets of application problems and arithmetic types respectively, and then take the average of the two as the final average accuracy of ability. The larger this value, the better the performance of the model.'
+      }
       const overallAverageTips = {
         content: lanyType === 'zh' ? '将该模型在n个数据集上的准确率直接算均值。该数值越大代表模型性能越好。' : 'Calculate the average accuracy of the model on n datasets directly. A higher value indicates better model performance.'
       }
@@ -66,6 +67,17 @@ import fewShotData from "data/few.json";
         content: lanyType === 'zh' ? '将该模型在n个数据集上的准确率排名的排序名次累加。该数值越小代表模型性能越好。' : "Add up the ranking positions of the model's accuracy on n datasets. A lower value indicates better model performance."
       }
       const averageColumn = [
+        // 能力平均
+        { field: 'overall_weighted', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: true },
+        { field: 'overall_weighted_cn', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
+        { field: 'overall_weighted_en', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
+        { field: 'math_world_problems_overall_weighted', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
+        { field: 'math_world_problems_overall_weighted_cn', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
+        { field: 'math_world_problems_overall_weighted_en', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
+        { field: 'arithmetics_overall_weighted', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
+        { field: 'arithmetics_overall_weighted_cn', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
+        { field: 'arithmetics_overall_weighted_en', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
+
         // 整体平均
         { field: 'overall_average', title: overallAverageName, 'title-help': overallAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: true },
         { field: 'overall_average_cn', title: overallAverageName, 'title-help': overallAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
@@ -110,7 +122,7 @@ import fewShotData from "data/few.json";
         tableData: highestData,
         sortConfig: {
           defaultSort: {
-            field: 'overall_average',
+            field: 'overall_weighted',
             order: 'desc'
           },
           showIcon: false,
@@ -143,6 +155,18 @@ import fewShotData from "data/few.json";
       },
 
       resetAverageColumn() {
+        const overall_weighted_list = [
+          'overall_weighted',
+          'overall_weighted_cn',
+          'overall_weighted_en',
+          'arithmetics_overall_weighted',
+          'arithmetics_overall_weighted_cn',
+          'arithmetics_overall_weighted_en',
+          'math_world_problems_overall_weighted',
+          'math_world_problems_overall_weighted_cn',
+          'math_world_problems_overall_weighted_en'
+        ]
+
         const overall_average_list = [
           'overall_average',
           'overall_average_cn',
@@ -179,15 +203,15 @@ import fewShotData from "data/few.json";
           'math_world_problems_cumulative_ranking_en'
         ];
 
-        const fieldKeys = ['overall_average', 'weighted_average', 'cumulative_ranking'];
+        const fieldKeys = ['overall_weighted', 'overall_average', 'weighted_average', 'cumulative_ranking'];
 
-        [overall_average_list, weighted_average_list, cumulative_ranking_list].forEach((listItem, listIndex) => {
+        [overall_weighted_list, overall_average_list, weighted_average_list, cumulative_ranking_list].forEach((listItem, listIndex) => {
           const prefix = `${this.abilityType === 'overall_average' ? '' : this.abilityType + '_'}${fieldKeys[listIndex]}`;
           const itemName = (this.languagesType === 'cn' || this.languagesType === 'en') ? `${prefix}_${this.languagesType}` : prefix;
           listItem.forEach((item) => {
             if (itemName === item) {
               this.$refs.Table.showColumn(this.$refs.Table.getColumnByField(item));
-              this.$refs.Table.sort(`${this.abilityType !== 'overall_average' ? this.abilityType + '_' : '' }overall_average${this.languagesType !== 'all' ? '_' + this.languagesType : ''}`, 'desc');
+              this.$refs.Table.sort(`${this.abilityType !== 'overall_average' ? this.abilityType + '_' : '' }overall_weighted${this.languagesType !== 'all' ? '_' + this.languagesType : ''}`, 'desc');
             } else {
               this.$refs.Table.hideColumn(this.$refs.Table.getColumnByField(item));
             }
@@ -269,7 +293,7 @@ import fewShotData from "data/few.json";
       },
 
       formatterNum({ cellValue }) {
-        return isNaN(Number(cellValue)) ? 'N/A' : Number(cellValue).toFixed(2);
+        return isNaN(Number(cellValue)) ? 'N/A' : Number(cellValue).toFixed(4);
       },
 
       formatterRank({ cellValue }) {

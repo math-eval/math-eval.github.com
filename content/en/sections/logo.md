@@ -4,7 +4,7 @@ enable: true
 logo:
   - group:  
     - image: "/images/logo/backup/logo-1.png"
-    - image: "/images/logo/backup/logo-2.png"
+    - image: "/images/logo/backup/logo-default.png"
 
   - group:
     - image: "/images/logo/backup/logo-3.png"

@@ -2,7 +2,7 @@
 # Banner
 banner:
   title: 大模型数学能力测评
-  content: MathEval是一个专注于全面评估大模型数学能力的测评基准。共包含22个数学领域测评集和超过70K道数学题目，旨在全面评估大模型在包含算术，小初高竞赛和部分高等数学分支在内的各阶段、难度和数学子领域的解题能力表现，既可以作为现阶段大模型之间数学能力横向对比的一站式参考，也可以为后续如何进一步提高大模型数学能力指引方向。
+  content: MathEval是一个专注于全面评估大模型数学能力的测评基准。共包含20+个数学领域测评集和超过70K道数学题目，旨在全面评估大模型在包含算术，小初高竞赛和部分高等数学分支在内的各阶段、难度和数学子领域的解题能力表现，既可以作为现阶段大模型之间数学能力横向对比的一站式参考，也可以为后续如何进一步提高大模型数学能力指引方向。
   image: /images/banner.png
   button:
     enable: true
@@ -34,7 +34,7 @@ model:
     - title: GPT-4
       team: OpenAI
       link: https://openai.com/gpt-4
-    
+
     - title: GPT-3.5
       team: OpenAI
       link: https://chat.openai.com/
@@ -62,18 +62,14 @@ model:
     - title: LLaMA2-70B-chat
       team: Meta
       link: https://huggingface.co/meta-llama/Llama-2-70b-chat-hf
-    
-    - title: chatGLMv2-6B
+
+    - title: ChatGLM2-6B
       team: 智谱AI及清华KEG实验室
       link: https://huggingface.co/THUDM/chatglm2-6b
 
     - title: Baichuan2-13B-Base
       team: 百川智能
       link: https://huggingface.co/baichuan-inc/Baichuan2-13B-Base
-
-    - title: InternLM-7B
-      team: 上海人工智能实验室（上海AI实验室）、商汤科技、香港中文大学、复旦大学、上海交通大学发布
-      link: https://huggingface.co/internlm/internlm-7b
 
     - title: InternLM-20B
       team: 上海人工智能实验室（上海AI实验室）、商汤科技、香港中文大学、复旦大学、上海交通大学发布
@@ -87,15 +83,7 @@ model:
       team: 好未来教育集团
       link: https://www.mathgpt.com/
 
-    - title: Qwen-7B
-      team: 阿里云
-      link: https://github.com/QwenLM/Qwen
-
     - title: Qwen-14B
-      team: 阿里云
-      link: https://github.com/QwenLM/Qwen
-
-    - title: Qwen-7B-Chat
       team: 阿里云
       link: https://github.com/QwenLM/Qwen
 
@@ -127,9 +115,25 @@ model:
       team: 上海交通大学GAIR（生成式人工智能研究组）团队
       link: https://gair-nlp.github.io/abel/
 
-    - title: Llama-2-Qlora
-      team: 佛罗里达大学AICE实验室
-      link: https://huggingface.co/uf-aice-lab/Llama-2-QLoRA
+    - title: Mistral-7B-Instruct-v0.1
+      team: Mistral AI
+      link: https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1
+
+    - title: Mistral-7B-v0.1
+      team: Mistral AI
+      link: https://huggingface.co/mistralai/Mistral-7B-v0.1
+
+    - title: Llemma-7B
+      team: Eleuther AI
+      link: https://huggingface.co/EleutherAI/llemma_7b
+
+    - title: Llemma-34B
+      team: Eleuther AI
+      link: https://huggingface.co/EleutherAI/llemma_34b
+
+    - title: MetaMath-70B
+      team: 剑桥大学、南方科技大学、香港科技大学、华为诺亚方舟实验室、艾伦·图灵研究院、马克斯·普朗克智能系统研究所
+      link: https://meta-math.github.io/
 
 # Dataset
 dataset:
