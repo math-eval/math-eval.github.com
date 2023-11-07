@@ -1,4 +1,4 @@
-import highestData from "data/overall.json";
+import bestData from "data/best.json";
 import zeroShotData from "data/zero.json";
 import fewShotData from "data/few.json";
 
@@ -119,7 +119,7 @@ import fewShotData from "data/few.json";
         abilityType: 'overall_average', // overall_average | arithmetics | math_world_problems
         averageColumn,
         datasetColumn,
-        tableData: highestData,
+        tableData: bestData,
         sortConfig: {
           defaultSort: {
             field: 'overall_weighted',
@@ -135,7 +135,7 @@ import fewShotData from "data/few.json";
         this.sampleType = type;
         this.$refs.Table.clearSort();
         if (type === 'highest') {
-          this.tableData = highestData;
+          this.tableData = bestData;
         }
         if (type === 'zero') {
           this.tableData = zeroShotData;
@@ -298,6 +298,22 @@ import fewShotData from "data/few.json";
 
       formatterRank({ cellValue }) {
         return isNaN(Number(cellValue)) ? 'N/A' : Number(cellValue);
+      },
+
+      formatterName({ cellValue }) {
+        const names = {
+          'wenxin': '文心一言',
+          'GPT4': 'GPT-4',
+          'GPT35': 'GPT-3.5',
+          'mathgpt': 'MathGPT',
+          'spark': '讯飞星火',
+          'internlm-chat-20B': 'Internlm-chat-20B',
+          'chatglm2-6B': 'Chatglm2-6B',
+          'moss-moon-003-base': 'Moss-moon-003-base',
+          'llemma_7B': 'Llemma-7B',
+          'llemma_34B': 'Llemma-34B'
+        }
+        return names[cellValue] || cellValue;
       }
     }
   })
