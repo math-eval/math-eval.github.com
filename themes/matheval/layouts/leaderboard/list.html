@@ -22,12 +22,24 @@
             <ul class="flex-1">
               <li
                 v-for="item in {{ .Params.filter_languages_json }}"
-                class="inline-block	mr-5 cursor-pointer" @click="languagesTypeChange(item.value)"
+                class="inline-block	mr-5 cursor-pointer"
+                @click="languagesTypeChange(item.value)"
               >
                 <i
                   class="fa-regular fa-circle-dot pr-2"
-                  :class="item.value === languagesType ? 'text-primary' : 'text-gray-300'"
-                ></i>${item.name}
+                  :class="{
+                    'text-primary': item.value === languagesType,
+                    'text-gray-300': abilityType !== 'arithmetics' && item.value !== languagesType,
+                    'text-gray-200': abilityType === 'arithmetics' && item.value !== 'all'
+                  }"
+                ></i>
+                <span
+                  :class="{
+                    'text-gray-300': abilityType === 'arithmetics' && item.value !== 'all'
+                  }"
+                >
+                  ${item.name}
+                </span>
               </li>
             </ul>
           </div>
@@ -41,8 +53,19 @@
               >
               <i
                 class="fa-regular fa-circle-dot pr-2"
-                :class="item.value === abilityType ? 'text-primary' : 'text-gray-300'"
-              ></i>${item.name}
+                :class="{
+                  'text-primary': item.value === abilityType,
+                  'text-gray-300': languagesType === 'all' || (languagesType !== 'all' && item.value !== 'arithmetics'),
+                  'text-gray-200': languagesType !== 'all' && item.value === 'arithmetics'
+                }"
+              ></i>
+              <span
+                :class="{
+                  'text-gray-300': languagesType !== 'all' && item.value === 'arithmetics'
+                }"
+              >
+                ${item.name}
+              </span>
               </li>
             </ul>
           </div>

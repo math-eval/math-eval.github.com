@@ -146,10 +146,16 @@ import fewShotData from "data/few.json";
         this.resetColumn();
       },
       languagesTypeChange(type) {
+        if (type !== 'all' && this.abilityType === 'arithmetics') {
+          return
+        }
         this.languagesType = type;
         this.resetColumn();
       },
       abilityTypeChange(type) {
+        if (type === 'arithmetics' && this.languagesType !== 'all') {
+          return
+        } 
         this.abilityType = type;
         this.resetColumn();
       },

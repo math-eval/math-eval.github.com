@@ -1,7 +1,7 @@
 ---
 title: "Big-Bench-Hard(Math)"
 description: "Big-Bench-Hard (Math) is a set of math problems involving multiple steps and basic arithmetic operations."
-categories: ["Arithmetics CN", "Arithmetics EN"]
+categories: ["Arithmetics"]
 draft: false
 
 github: "https://github.com/suzgunmirac/BIG-Bench-Hard"
