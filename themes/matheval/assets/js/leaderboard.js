@@ -10,13 +10,13 @@ import fewShotData from "data/few.json";
 
   const filterConfig = {
     // 中文数据集
-    cn: ['hmwp', 'scq_ch', 'GAOKAO-BENCH', 'cmmlu', 'math23k', 'ape210k', 'BBH', 'AGIEval'],
+    cn: ['hmwp', 'scq_ch', 'GAOKAO-BENCH', 'cmmlu', 'math23k', 'ape210k', 'BBH', 'AGIEval', 'arith_std'],
     // 英文数据集
-    en: ['GSM8K', 'math', 'mmlu', 'svamp', 'math401', 'draw', 'dolphin1878', 'scq_en', 'mawps', 'asdiv-a', 'MathQA', 'BBH'],
+    en: ['GSM8K', 'math', 'mmlu', 'svamp', 'math401', 'draw', 'dolphin1878', 'scq_en', 'mawps', 'asdiv-a', 'MathQA', 'BBH', 'arith_std'],
     // 应用题
     math_world_problems: ['GSM8K', 'math', 'mmlu', 'svamp', 'draw', 'hmwp', 'dolphin1878', 'scq_en', 'scq_ch', 'mawps', 'GAOKAO-BENCH', 'asdiv-a', 'cmmlu', 'MathQA', 'math23k', 'ape210k', 'AGIEval'],
     // 算术
-    arithmetics: ['math401', 'BBH'],
+    arithmetics: ['math401', 'BBH', 'arith_std'],
   }
 
   const datasetColumn = [
@@ -39,6 +39,7 @@ import fewShotData from "data/few.json";
     { field: 'ape210k', title: 'Ape210K', width: 90, align: 'center', sortable: true, visible: true },
     { field: 'BBH', title: 'Big-Bench-Hard(Math)', width: 180, align: 'center', sortable: true, visible: true },
     { field: 'AGIEval', title: 'AGIEval', width: 90, align: 'center', sortable: true, visible: true },
+    { field: 'arith_std', title: 'Arith3K', width: 90, align: 'center', sortable: true, visible: true },
   ]
 
   const { createApp } = Vue
