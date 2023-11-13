@@ -203,7 +203,6 @@ import fewShotData from "data/few.json";
         [ability_average_list, overall_average_list, weighted_average_list, cumulative_ranking_list].forEach((listItem, listIndex) => {
           const prefix = `${this.abilityType === 'overall_average' ? '' : this.abilityType + '_'}${fieldKeys[listIndex]}`;
           const itemName = (this.languagesType === 'cn' || this.languagesType === 'en') ? `${prefix}_${this.languagesType}` : prefix;
-          console.log(itemName)
           listItem.forEach((item) => {
             if (itemName === item) {
               this.$refs.Table.showColumn(this.$refs.Table.getColumnByField(item));
