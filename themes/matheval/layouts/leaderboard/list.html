@@ -143,7 +143,7 @@
           </div>
           <div class="flex">
             <div class="w-[55px] font-bold">说明3：</div>
-            <div class="flex-1">对于MMLU(math)、C-eval(math)等选择题，我们同时用直接生成答案和依据困惑度进行选项预测两种方式进行实验，并用较好结果作为榜单中的评测结果。</div>
+            <div class="flex-1">对于MMLU(math)选择题，我们同时用直接生成答案和依据困惑度进行选项预测两种方式进行实验，并用较好结果作为榜单中的评测结果。</div>
           </div>
         </div>
         {{ else }}
@@ -161,7 +161,7 @@
           </div>
           <div class="flex">
             <div class="w-[55px] font-bold">Note 3:</div>
-            <div class="flex-1">For multiple-choice questions such as MMLU(math) and C-eval(math), we conducted experiments in two ways: directly generating answers and predicting options based on perplexity. The better results are used as the evaluation results in the leaderboard.</div>
+            <div class="flex-1">For multiple-choice MMLU(math), we conducted experiments in two ways: directly generating answers and predicting options based on perplexity. The better results are used as the evaluation results in the leaderboard.</div>
           </div>
         </div>
         {{ end }}
