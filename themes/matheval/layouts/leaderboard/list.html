@@ -27,19 +27,9 @@
               >
                 <i
                   class="fa-regular fa-circle-dot pr-2"
-                  :class="{
-                    'text-primary': item.value === languagesType,
-                    'text-gray-300': abilityType !== 'arithmetics' && item.value !== languagesType,
-                    'text-gray-200': abilityType === 'arithmetics' && item.value !== 'all'
-                  }"
+                  :class="item.value === languagesType ? 'text-primary' : 'text-gray-300'"
                 ></i>
-                <span
-                  :class="{
-                    'text-gray-300': abilityType === 'arithmetics' && item.value !== 'all'
-                  }"
-                >
-                  ${item.name}
-                </span>
+                ${item.name}
               </li>
             </ul>
           </div>
@@ -53,19 +43,9 @@
               >
               <i
                 class="fa-regular fa-circle-dot pr-2"
-                :class="{
-                  'text-primary': item.value === abilityType,
-                  'text-gray-300': languagesType === 'all' || (languagesType !== 'all' && item.value !== 'arithmetics'),
-                  'text-gray-200': languagesType !== 'all' && item.value === 'arithmetics'
-                }"
+                :class="item.value === abilityType ? 'text-primary' : 'text-gray-300'"
               ></i>
-              <span
-                :class="{
-                  'text-gray-300': languagesType !== 'all' && item.value === 'arithmetics'
-                }"
-              >
-                ${item.name}
-              </span>
+              ${item.name}
               </li>
             </ul>
           </div>
@@ -101,7 +81,10 @@
           </div>
           <div class="flex mb-2">
             <div class="w-[75px] font-bold">能力平均：</div>
-            <div class="flex-1">分别计算模型在应用题和算数类型各个数据集上的平均准确率，然后取两者的平均值作为最终能力平均准确率。该数值越大代表模型性能越好。</div>
+            <div class="flex-1">
+              <span v-if="abilityType === 'overall_average'">分别计算模型在应用题和算数类型各个数据集上的平均准确率，然后取两者的平均值作为最终能力平均准确率。该数值越大代表模型性能越好。</span>
+              <span v-else>当只选择应用题或算术能力维度的时候，能力平均取算数平均作为能力平均值。该数值越大代表模型性能越好。</span>
+            </div>
           </div>
           <div class="flex mb-2">
             <div class="w-[75px] font-bold">整体平均：</div>
@@ -123,7 +106,10 @@
           </div>
           <div class="flex mb-2">
             <div class="w-[140px] font-bold">Ability average:</div>
-            <div class="flex-1">Calculate the average accuracy of the model on various datasets of application problems and arithmetic types respectively, and then take the average of the two as the final average accuracy of ability. A higher value indicates better model performance.</div>
+            <div class="flex-1">
+              <span v-if="abilityType === 'overall_average'">Calculate the average accuracy of the model on various datasets of application problems and arithmetic types respectively, and then take the average of the two as the final average accuracy of ability. A higher value indicates better model performance.</span>
+              <span v-else>When opting for either the math word problem or arithmetic dimension, the mean of the scores is calculated as the proficiency average. A higher numerical value indicates better model performance. We take the arithmetic average of all the datasets corresponding to the selected ability dimension as the final average accuracy of ability. </span>
+            </div>
           </div>
           <div class="flex mb-2">
             <div class="w-[140px] font-bold">Overall average:</div>
