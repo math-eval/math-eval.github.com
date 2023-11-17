@@ -1,6 +1,7 @@
 import bestData from "data/best.json";
 import zeroShotData from "data/zero.json";
 import fewShotData from "data/few.json";
+import testCountData from "data/testCount.json";
 
 (function () {
   "use strict";
@@ -8,17 +9,36 @@ import fewShotData from "data/few.json";
   const leaderboardApp = document.getElementById("leaderboardApp");
   if (!leaderboardApp) return;
 
-  const filterConfig = {
-    // 中文数据集
-    cn: ['hmwp', 'scq_ch', 'GAOKAO-BENCH', 'cmmlu', 'math23k', 'ape210k', 'BBH', 'AGIEval', 'arith_std'],
-    // 英文数据集
-    en: ['GSM8K', 'math', 'mmlu', 'svamp', 'math401', 'draw', 'dolphin1878', 'scq_en', 'mawps', 'asdiv-a', 'MathQA', 'BBH', 'arith_std'],
-    // 应用题
-    math_world_problems: ['GSM8K', 'math', 'mmlu', 'svamp', 'draw', 'hmwp', 'dolphin1878', 'scq_en', 'scq_ch', 'mawps', 'GAOKAO-BENCH', 'asdiv-a', 'cmmlu', 'MathQA', 'math23k', 'ape210k', 'AGIEval'],
-    // 算术
-    arithmetics: ['math401', 'BBH', 'arith_std'],
-  }
+  const langType = /\/en/.test(new URL(window.location.href).pathname) ? 'en' : 'zh';
 
+  const abilityAverageName = langType === 'zh' ? '能力平均' : 'Ability average';
+  const overallAverageName = langType === 'zh' ? '整体平均' : 'Overall average';
+  const weightedAverageName = langType === 'zh' ? '加权平均' : 'Weighted average';
+  const cumulativeRankingName = langType === 'zh' ? '累加排位' : 'Cumulative ranking';
+  const abilityAverageTips = {
+    content: langType === 'zh' ? '分别计算模型在应用题和算数类型各个数据集上的平均准确率，然后取两者的平均值作为最终能力平均准确率。该数值越大代表模型性能越好。' : 'Calculate the average accuracy of the model on various datasets of application problems and arithmetic types respectively, and then take the average of the two as the final average accuracy of ability. The larger this value, the better the performance of the model.'
+  }
+  const overallAverageTips = {
+    content: langType === 'zh' ? '将该模型在n个数据集上的准确率直接算均值。该数值越大代表模型性能越好。' : 'Calculate the average accuracy of the model on n datasets directly. A higher value indicates better model performance.'
+  }
+  const weightedAverageTips = {
+    content: langType === 'zh' ? '用该模型在n个数据集上所有做对题目数除以所有数据集的总题目数。该数值越大代表模型性能越好。' : 'The number of correct questions of the model on n datasets is divided by the total number of questions in all datasets. The larger this value, the better the performance of the model.'
+  }
+  const cumulativeRankingTips = {
+    content: langType === 'zh' ? '将该模型在n个数据集上的准确率排名的排序名次累加。该数值越小代表模型性能越好。' : "Add up the ranking positions of the model's accuracy on n datasets. A lower value indicates better model performance."
+  }
+  const formatterNum = function ({ cellValue }) {
+    return isNaN(Number(cellValue)) ? 'N/A' : Number(cellValue).toFixed(4);
+  }
+  const formatterRank = function ({ cellValue }) {
+    return isNaN(Number(cellValue)) ? 'N/A' : Number(cellValue);
+  }
+  const averageColumn = [
+    { field: 'ability_average', title: abilityAverageName, 'title-help': abilityAverageTips, width: langType === 'zh' ? 120 : 160, formatter: formatterNum, align: 'center', sortable: true, visible: true },
+    { field: 'overall_average', title: overallAverageName, 'title-help': overallAverageTips, width: langType === 'zh' ? 120 : 160, formatter: formatterNum, align: 'center', sortable: true, visible: true },
+    { field: 'weighted_average', title: weightedAverageName, 'title-help': weightedAverageTips, width: langType === 'zh' ? 120 : 180, formatter: formatterNum, align: 'center', sortable: true, visible: true },
+    { field: 'cumulative_ranking', title: cumulativeRankingName, 'title-help': cumulativeRankingTips, width: langType === 'zh' ? 120 : 180, formatter: formatterRank, align: 'center', sortable: true, visible: true },
+  ]
   const datasetColumn = [
     { field: 'scq_en', title: 'TAL-SCQ5K-EN', width: 140, align: 'center', sortable: true, visible: true },
     { field: 'scq_ch', title: 'TAL-SCQ5K-CN', width: 140, align: 'center', sortable: true, visible: true },
@@ -41,83 +61,34 @@ import fewShotData from "data/few.json";
     { field: 'AGIEval', title: 'AGIEval', width: 90, align: 'center', sortable: true, visible: true },
     { field: 'arith_std', title: 'Arith3K', width: 90, align: 'center', sortable: true, visible: true },
   ]
+  const filterConfig = {
+    // 中文数据集
+    cn: ['hmwp', 'scq_ch', 'GAOKAO-BENCH', 'cmmlu', 'math23k', 'ape210k', 'BBH', 'AGIEval', 'arith_std', 'math401'],
+    // 英文数据集
+    en: ['GSM8K', 'math', 'mmlu', 'svamp', 'math401', 'draw', 'dolphin1878', 'scq_en', 'mawps', 'asdiv-a', 'MathQA', 'BBH', 'arith_std'],
+    // 应用题
+    math_world_problems: ['GSM8K', 'math', 'mmlu', 'svamp', 'draw', 'hmwp', 'dolphin1878', 'scq_en', 'scq_ch', 'mawps', 'GAOKAO-BENCH', 'asdiv-a', 'cmmlu', 'MathQA', 'math23k', 'ape210k', 'AGIEval'],
+    // 算术
+    arithmetics: ['math401', 'BBH', 'arith_std'],
+    // 小学
+    primary: [],
+    // 初中
+    middle: [],
+    // 高中
+    high: [],
+    // 大学
+    college: []
+  }
 
   const { createApp } = Vue
   const app = createApp({
     data() {
-      let lanyType = 'zh';
-      const url = new URL(window.location.href);
-      if (/\/en/.test(url.pathname)) {
-        lanyType = 'en';
-      }
-
-      const abilityAverageName = lanyType === 'zh' ? '能力平均' : 'Ability average';
-      const overallAverageName = lanyType === 'zh' ? '整体平均' : 'Overall average';
-      const weightedAverageName = lanyType === 'zh' ? '加权平均' : 'Weighted average';
-      const cumulativeRankingName = lanyType === 'zh' ? '累加排位' : 'Cumulative ranking';
-      const abilityAverageTips = {
-        content: lanyType === 'zh' ? '分别计算模型在应用题和算数类型各个数据集上的平均准确率，然后取两者的平均值作为最终能力平均准确率。该数值越大代表模型性能越好。' : 'Calculate the average accuracy of the model on various datasets of application problems and arithmetic types respectively, and then take the average of the two as the final average accuracy of ability. The larger this value, the better the performance of the model.'
-      }
-      const overallAverageTips = {
-        content: lanyType === 'zh' ? '将该模型在n个数据集上的准确率直接算均值。该数值越大代表模型性能越好。' : 'Calculate the average accuracy of the model on n datasets directly. A higher value indicates better model performance.'
-      }
-      const weightedAverageTips = {
-        content: lanyType === 'zh' ? '用该模型在n个数据集上所有做对题目数除以所有数据集的总题目数。该数值越大代表模型性能越好。' : 'The number of correct questions of the model on n datasets is divided by the total number of questions in all datasets. The larger this value, the better the performance of the model.'
-      }
-      const cumulativeRankingTips = {
-        content: lanyType === 'zh' ? '将该模型在n个数据集上的准确率排名的排序名次累加。该数值越小代表模型性能越好。' : "Add up the ranking positions of the model's accuracy on n datasets. A lower value indicates better model performance."
-      }
-      const averageColumn = [
-        // 能力平均
-        { field: 'ability_average', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: true },
-        { field: 'ability_average_cn', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'ability_average_en', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'math_world_problems_ability_average', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'math_world_problems_ability_average_cn', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'math_world_problems_ability_average_en', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'arithmetics_ability_average', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'arithmetics_ability_average_cn', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'arithmetics_ability_average_en', title: abilityAverageName, 'title-help': abilityAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-
-        // 整体平均
-        { field: 'overall_average', title: overallAverageName, 'title-help': overallAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: true },
-        { field: 'overall_average_cn', title: overallAverageName, 'title-help': overallAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'overall_average_en', title: overallAverageName, 'title-help': overallAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'math_world_problems_overall_average', title: overallAverageName, 'title-help': overallAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'math_world_problems_overall_average_cn', title: overallAverageName, 'title-help': overallAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'math_world_problems_overall_average_en', title: overallAverageName, 'title-help': overallAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'arithmetics_overall_average', title: overallAverageName, 'title-help': overallAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'arithmetics_overall_average_cn', title: overallAverageName, 'title-help': overallAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'arithmetics_overall_average_en', title: overallAverageName, 'title-help': overallAverageTips, width: lanyType === 'zh' ? 120 : 160, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-
-        // 加权平均
-        { field: 'weighted_average', title: weightedAverageName, 'title-help': weightedAverageTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterNum, align: 'center', sortable: true, visible: true },
-        { field: 'weighted_average_cn', title: weightedAverageName, 'title-help': weightedAverageTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'weighted_average_en', title: weightedAverageName, 'title-help': weightedAverageTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'math_world_problems_weighted_average', title: weightedAverageName, 'title-help': weightedAverageTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'math_world_problems_weighted_average_cn', title: weightedAverageName, 'title-help': weightedAverageTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'math_world_problems_weighted_average_en', title: weightedAverageName, 'title-help': weightedAverageTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'arithmetics_weighted_average', title: weightedAverageName, 'title-help': weightedAverageTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'arithmetics_weighted_average_cn', title: weightedAverageName, 'title-help': weightedAverageTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-        { field: 'arithmetics_weighted_average_en', title: weightedAverageName, 'title-help': weightedAverageTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterNum, align: 'center', sortable: true, visible: false },
-
-        // 累加排位
-        { field: 'cumulative_ranking', title: cumulativeRankingName, 'title-help': cumulativeRankingTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterRank, align: 'center', sortable: true, visible: true },
-        { field: 'cumulative_ranking_cn', title: cumulativeRankingName, 'title-help': cumulativeRankingTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterRank, align: 'center', sortable: true, visible: false },
-        { field: 'cumulative_ranking_en', title: cumulativeRankingName, 'title-help': cumulativeRankingTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterRank, align: 'center', sortable: true, visible: false },
-        { field: 'math_world_problems_cumulative_ranking', title: cumulativeRankingName, 'title-help': cumulativeRankingTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterRank, align: 'center', sortable: true, visible: false },
-        { field: 'math_world_problems_cumulative_ranking_cn', title: cumulativeRankingName, 'title-help': cumulativeRankingTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterRank, align: 'center', sortable: true, visible: false },
-        { field: 'math_world_problems_cumulative_ranking_en', title: cumulativeRankingName, 'title-help': cumulativeRankingTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterRank, align: 'center', sortable: true, visible: false },
-        { field: 'arithmetics_cumulative_ranking', title: cumulativeRankingName, 'title-help': cumulativeRankingTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterRank, align: 'center', sortable: true, visible: false },
-        { field: 'arithmetics_cumulative_ranking_cn', title: cumulativeRankingName, 'title-help': cumulativeRankingTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterRank, align: 'center', sortable: true, visible: false },
-        { field: 'arithmetics_cumulative_ranking_en', title: cumulativeRankingName, 'title-help': cumulativeRankingTips, width: lanyType === 'zh' ? 120 : 180, formatter: this.formatterRank, align: 'center', sortable: true, visible: false },
-      ]
-
       return {
-        lanyType,
-        sampleType: 'highest', // zero | few | highest
+        sampleType: 'best', // best | zero | few
         languagesType: 'all', // all | cn | en
-        abilityType: 'overall_average', // overall_average | arithmetics | math_world_problems
+        abilityType: 'all', // all | arithmetics | math_world_problems
+        gradeType: 'all', // all | primary | middle | high | college
+        quickViewType: '', // 数据集速览
         averageColumn,
         datasetColumn,
         tableData: bestData,
@@ -128,14 +99,27 @@ import fewShotData from "data/few.json";
           },
           showIcon: false,
           sortMethod: this.customSortMethod
-        }
+        },
+        loading: false,
+        columns: []
       }
+    },
+    computed: {
+      datasetList() {
+        return this.datasetColumn.map(item => item.field)
+      }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.columns = this.$refs.Table.getColumns();
+        this.updateTableData();
+      })
     },
     methods: {
       sampleTypeChange(type) {
         this.sampleType = type;
         this.$refs.Table.clearSort();
-        if (type === 'highest') {
+        if (type === 'best') {
           this.tableData = bestData;
         }
         if (type === 'zero') {
@@ -144,118 +128,89 @@ import fewShotData from "data/few.json";
         if (type === 'few') {
           this.tableData = fewShotData;
         }
-        this.resetColumn();
+        this.delayResetColumn()
       },
       languagesTypeChange(type) {
+        if (this.quickViewType) {
+          return;
+        }
         this.languagesType = type;
-        this.resetColumn();
+        this.delayResetColumn()
       },
       abilityTypeChange(type) {
+        if (this.quickViewType) {
+          return;
+        }
         this.abilityType = type;
-        this.resetColumn();
+        this.delayResetColumn()
       },
-
-      resetAverageColumn() {
-        const ability_average_list = [
-          'ability_average',
-          'ability_average_cn',
-          'ability_average_en',
-          'arithmetics_ability_average',
-          'arithmetics_ability_average_cn',
-          'arithmetics_ability_average_en',
-          'math_world_problems_ability_average',
-          'math_world_problems_ability_average_cn',
-          'math_world_problems_ability_average_en',
-        ]
-
-        const overall_average_list = [
-          'overall_average',
-          'overall_average_cn',
-          'overall_average_en',
-          'arithmetics_overall_average',
-          'arithmetics_overall_average_cn',
-          'arithmetics_overall_average_en',
-          'math_world_problems_overall_average',
-          'math_world_problems_overall_average_cn',
-          'math_world_problems_overall_average_en'
-        ];
-
-        const weighted_average_list = [
-          'weighted_average',
-          'weighted_average_cn',
-          'weighted_average_en',
-          'arithmetics_weighted_average',
-          'arithmetics_weighted_average_cn',
-          'arithmetics_weighted_average_en',
-          'math_world_problems_weighted_average',
-          'math_world_problems_weighted_average_cn',
-          'math_world_problems_weighted_average_en'
-        ];
-
-        const cumulative_ranking_list = [
-          'cumulative_ranking',
-          'cumulative_ranking_cn',
-          'cumulative_ranking_en',
-          'arithmetics_cumulative_ranking',
-          'arithmetics_cumulative_ranking_cn',
-          'arithmetics_cumulative_ranking_en',
-          'math_world_problems_cumulative_ranking',
-          'math_world_problems_cumulative_ranking_cn',
-          'math_world_problems_cumulative_ranking_en'
-        ];
-
-        const fieldKeys = ['ability_average', 'overall_average', 'weighted_average', 'cumulative_ranking'];
-
-        [ability_average_list, overall_average_list, weighted_average_list, cumulative_ranking_list].forEach((listItem, listIndex) => {
-          const prefix = `${this.abilityType === 'overall_average' ? '' : this.abilityType + '_'}${fieldKeys[listIndex]}`;
-          const itemName = (this.languagesType === 'cn' || this.languagesType === 'en') ? `${prefix}_${this.languagesType}` : prefix;
-          listItem.forEach((item) => {
-            if (itemName === item) {
-              this.$refs.Table.showColumn(this.$refs.Table.getColumnByField(item));
-              const sortField = `${this.abilityType !== 'overall_average' ? this.abilityType + '_' : '' }ability_average${this.languagesType !== 'all' ? '_' + this.languagesType : ''}`
-              this.$refs.Table.sort(sortField, 'desc');
-            } else {
-              this.$refs.Table.hideColumn(this.$refs.Table.getColumnByField(item));
-            }
-          });
-        });
+      gradeTypeChange(type) {
+        if (this.quickViewType) {
+          return;
+        }
+        this.gradeType = type;
+        this.delayResetColumn()
       },
-
+      quickViewTypeChange(type) {
+        if (type !== this.quickViewType) {
+          this.languagesType = 'all';
+          this.abilityType = 'all';
+          this.gradeType = 'all';
+          this.quickViewType = type;
+        } else {
+          this.quickViewType = '';
+        }
+        setTimeout(() => {
+          // 选择数据集速览, 只显示当前选择数据集的列
+          if (this.quickViewType) {
+            // 不显示能力平均, 整体平均, 加权平均, 累加排位
+            this.averageColumn.forEach(item => {
+              this.visibleColumn(item.field, false)
+            })
+            this.datasetColumn.forEach(item => {
+              if (item.field === this.quickViewType) {
+                this.visibleColumn(item.field, true)
+              } else {
+                this.visibleColumn(item.field, false)
+              }
+            })
+            
+            this.$refs.Table.refreshColumn();
+            this.$refs.Table.reloadData(this.tableData);
+            this.$refs.Table.sort(this.quickViewType, 'desc');
+            return;
+          }
+          this.averageColumn.forEach(item => {
+            this.visibleColumn(item.field, true)
+          })
+          this.$refs.Table.refreshColumn();
+          this.resetColumn();
+        }, 0)
+      },
+      visibleColumn(field, visible) {
+        this.columns.filter(column => column.field === field)[0].visible = visible;
+      },
+      delayResetColumn() {
+        setTimeout(() => {
+          this.resetColumn();
+        }, 0)
+      },
+      arrayMerge(arr1, arr2) {
+        return Array.from(new Set([...arr1, ...arr2]));
+      },
       resetColumn() {
-        if (this.languagesType === 'all') {
-          datasetColumn.forEach(item => {
-            if (this.abilityType === 'overall_average') {
-              this.$refs.Table.showColumn(this.$refs.Table.getColumnByField(item.field));
-            }
-            if (this.abilityType === 'arithmetics' || this.abilityType === 'math_world_problems') {
-              if (filterConfig[this.abilityType].includes(item.field)) {
-                this.$refs.Table.showColumn(this.$refs.Table.getColumnByField(item.field));
-              } else {
-                this.$refs.Table.hideColumn(this.$refs.Table.getColumnByField(item.field));
-              }
-            }
-            this.resetAverageColumn();
-          });
-        }
-        if (this.languagesType === 'cn' || this.languagesType === 'en') {
-          datasetColumn.forEach(item => {
-            if (this.abilityType === 'overall_average') {
-              if (filterConfig[this.languagesType].includes(item.field)) {
-                this.$refs.Table.showColumn(this.$refs.Table.getColumnByField(item.field));
-              } else {
-                this.$refs.Table.hideColumn(this.$refs.Table.getColumnByField(item.field));
-              }
-            }
-            if (this.abilityType === 'arithmetics' || this.abilityType === 'math_world_problems') {
-              if (filterConfig[this.languagesType].includes(item.field) && filterConfig[this.abilityType].includes(item.field)) {
-                this.$refs.Table.showColumn(this.$refs.Table.getColumnByField(item.field));
-              } else {
-                this.$refs.Table.hideColumn(this.$refs.Table.getColumnByField(item.field));
-              }
-            }
-            this.resetAverageColumn();
-          });
-        }
+        const languagesConfig = this.languagesType === 'all' ? this.arrayMerge(filterConfig['cn'], filterConfig['en']) : filterConfig[this.languagesType]
+        const abilityConfig = this.abilityType === 'all' ? this.arrayMerge(filterConfig['arithmetics'], filterConfig['math_world_problems']) : filterConfig[this.abilityType]
+        const gradeConfig = this.gradeType === 'all' ? this.arrayMerge(filterConfig['primary'], filterConfig['middle'], filterConfig['high'], filterConfig['college']) : filterConfig[this.gradeType]
+        datasetColumn.forEach(item => {
+          if (languagesConfig.includes(item.field) && abilityConfig.includes(item.field)) {
+            this.visibleColumn(item.field, true)
+          } else {
+            this.visibleColumn(item.field, false)
+          }
+        })
+        this.$refs.Table.refreshColumn();
+        this.updateTableData();
       },
 
       headerCellClickEvent ({ column }) {
@@ -294,13 +249,9 @@ import fewShotData from "data/few.json";
         })
       },
 
-      formatterNum({ cellValue }) {
-        return isNaN(Number(cellValue)) ? 'N/A' : Number(cellValue).toFixed(4);
-      },
+      formatterNum: formatterNum,
 
-      formatterRank({ cellValue }) {
-        return isNaN(Number(cellValue)) ? 'N/A' : Number(cellValue);
-      },
+      formatterRank: formatterRank,
 
       formatterName({ cellValue }) {
         const names = {
@@ -316,7 +267,127 @@ import fewShotData from "data/few.json";
           'llemma_34B': 'Llemma-34B'
         }
         return names[cellValue] || cellValue;
-      }
+      },
+
+      // 更新能力平均值
+      // 在单应用题和算数的情况下，都是各自的整体平均
+      // 在其它情况下，是选定条件的(算数整体平均+应用题整体平均)/2
+      updateAbilityAverage() {
+        const columns = this.$refs.Table.getColumns();
+        const datasetColumns = columns.filter(item => this.datasetList.includes(item.field));
+        // 能力维度:全部
+        if (this.abilityType === 'all') {
+          let arithmeticsAverage = 0;
+          let mathWorldProblemsAverage = 0;
+          const arithmeticsColumns = columns.filter(item => filterConfig.arithmetics.includes(item.field));
+          const mathWorldProblemsColumns = columns.filter(item => filterConfig.math_world_problems.includes(item.field));
+          // console.log('updateAbilityAverage', arithmeticsColumns, mathWorldProblemsColumns)
+          this.tableData.forEach((item) => {
+            let arithmeticsCount = 0; 
+            let mathWorldProblemsCount = 0;
+            arithmeticsColumns.forEach((column) => {
+              arithmeticsCount += item[column.field] * 10000
+            })
+            mathWorldProblemsColumns.forEach((column) => {
+              mathWorldProblemsCount += item[column.field] * 10000
+            })
+            arithmeticsAverage = (Math.round(arithmeticsCount / arithmeticsColumns.length) / 10000).toFixed(4);
+            mathWorldProblemsAverage = (Math.round(mathWorldProblemsCount / mathWorldProblemsColumns.length) / 10000).toFixed(4);
+            item.ability_average = ((Number(arithmeticsAverage) + Number(mathWorldProblemsAverage)) / 2).toFixed(4);
+          })
+        } else {
+          this.tableData.forEach((item) => {
+            let count = 0;
+            datasetColumns.forEach((column) => {
+              count += item[column.field] * 10000
+            })
+            item.ability_average = (Math.round(count / datasetColumns.length) / 10000).toFixed(4);
+          })
+        }
+      },
+
+      // 更新整体平均值
+      // 选定数据集中的平均值
+      updateOverallAverage() {
+        const columns = this.$refs.Table.getColumns();
+        const datasetColumns = columns.filter(item => this.datasetList.includes(item.field));
+        this.tableData.forEach((item) => {
+          let count = 0;
+          datasetColumns.forEach((column) => {
+            count += item[column.field] * 10000
+          })
+          // console.log(item.name, count / datasetColumns.length, Math.round(count / datasetColumns.length), (Math.round(count / datasetColumns.length) / 10000))
+          item.overall_average = (Math.round(count / datasetColumns.length) / 10000).toFixed(4);
+        })
+      },
+
+      // 更新加权平均值
+      // 选定数据集中的acc*数量/(数量和)
+      updateWeightedAverage() {
+        const columns = this.$refs.Table.getColumns();
+        const datasetColumns = columns.filter(item => this.datasetList.includes(item.field));
+        this.tableData.forEach((item) => {
+          let weightedAverage = 0;
+          let averageCount = 0;
+          let testCount = 0;
+          datasetColumns.forEach((column) => {
+            averageCount += item[column.field] * testCountData[column.field];
+            testCount += testCountData[column.field];
+          })
+          weightedAverage = averageCount / testCount;
+          item.weighted_average = weightedAverage.toFixed(4);
+        })
+      },
+
+      // 更新累加排位
+      // 选定数据集，在所有模型内排序的位数，累加的和
+      updateCumulativeRanking() {
+        const columns = this.$refs.Table.getColumns();
+        const datasetColumns = columns.filter(item => this.datasetList.includes(item.field));
+        // console.log('updateCumulativeRanking', datasetColumns)
+        // 遍历所有模型
+        this.tableData.forEach((item) => {
+          // 当前模型的累加排位
+          let count = 0;
+          // 遍历所有数据集, 在所有模型中获取当前数据集的排位
+          datasetColumns.forEach((column) => {
+            // 将tableData数据按column数据集的值从大到小排序, 返回数组对象格式
+            const tableDataRanking = JSON.parse(JSON.stringify(this.tableData.sort((a, b) => {
+              return b[column.field] - a[column.field];
+            })))
+            // tableDataRanking数组中有相同值的排名, 将这个数组转换为对象, key为模型名称, value为排名, 相同的排名并列
+            const tableDataRankingMap = new Map();
+            tableDataRanking.forEach((tableDataItem) => {
+              if (tableDataRankingMap.has(tableDataItem[column.field])) {
+                tableDataRankingMap.get(tableDataItem[column.field]).push(tableDataItem.name);
+              } else {
+                tableDataRankingMap.set(tableDataItem[column.field], [tableDataItem.name]);
+              }
+            })
+            // 将tableDataRankingMap转换为map对象, key为value数组的模型名称, value为key的排序索引
+            const tableDataRankingMapIndex = new Map();
+            let indexCache = 1;
+            tableDataRankingMap.forEach((tableDataRankingMapItem) => {
+              tableDataRankingMapItem.forEach((tableDataRankingMapItemItem) => {
+                tableDataRankingMapIndex.set(tableDataRankingMapItemItem, indexCache);
+              })
+              indexCache++;
+            })
+            
+            count += tableDataRankingMapIndex.get(item.name);
+          })
+          item.cumulative_ranking = count;
+        })
+      },
+
+      updateTableData() {
+        this.updateAbilityAverage();
+        this.updateOverallAverage();
+        this.updateWeightedAverage();
+        this.updateCumulativeRanking();
+        this.$refs.Table.reloadData(this.tableData);
+        this.$refs.Table.sort('ability_average', 'desc');
+      },
     }
   })
   app.use(VXETable)
