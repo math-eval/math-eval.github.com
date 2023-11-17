@@ -1,10 +1,26 @@
-import bestData from "data/best.json";
-import zeroShotData from "data/zero.json";
-import fewShotData from "data/few.json";
+import bestJSON from "data/best.json";
+import zeroShotJSON from "data/zero.json";
+import fewShotJSON from "data/few.json";
 import testCountData from "data/testCount.json";
 
 (function () {
   "use strict";
+
+  function initTableData(data) {
+    return data.map((item) => {
+      return {
+        ...item,
+        'ability_average': 0,
+        'overall_average': 0,
+        'weighted_average': 0,
+        'cumulative_ranking': 0,
+      }
+    })
+  }
+
+  const bestData = initTableData(bestJSON);
+  const zeroShotData = initTableData(zeroShotJSON);
+  const fewShotData = initTableData(fewShotJSON);
 
   const leaderboardApp = document.getElementById("leaderboardApp");
   if (!leaderboardApp) return;
@@ -118,7 +134,6 @@ import testCountData from "data/testCount.json";
     methods: {
       sampleTypeChange(type) {
         this.sampleType = type;
-        this.$refs.Table.clearSort();
         if (type === 'best') {
           this.tableData = bestData;
         }
@@ -344,7 +359,6 @@ import testCountData from "data/testCount.json";
       updateCumulativeRanking() {
         const columns = this.$refs.Table.getColumns();
         const datasetColumns = columns.filter(item => this.datasetList.includes(item.field));
-        // console.log('updateCumulativeRanking', datasetColumns)
         // 遍历所有模型
         this.tableData.forEach((item) => {
           // 当前模型的累加排位
@@ -352,9 +366,9 @@ import testCountData from "data/testCount.json";
           // 遍历所有数据集, 在所有模型中获取当前数据集的排位
           datasetColumns.forEach((column) => {
             // 将tableData数据按column数据集的值从大到小排序, 返回数组对象格式
-            const tableDataRanking = JSON.parse(JSON.stringify(this.tableData.sort((a, b) => {
+            const tableDataRanking = [...this.tableData].sort((a, b) => {
               return b[column.field] - a[column.field];
-            })))
+            })
             // tableDataRanking数组中有相同值的排名, 将这个数组转换为对象, key为模型名称, value为排名, 相同的排名并列
             const tableDataRankingMap = new Map();
             tableDataRanking.forEach((tableDataItem) => {
