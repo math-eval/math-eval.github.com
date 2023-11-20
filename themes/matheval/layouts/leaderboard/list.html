@@ -22,12 +22,12 @@
             <ul class="flex-1">
               <li
                 v-for="item in {{ .Params.filter_languages_json }}"
-                class="inline-block	mr-5 cursor-pointer"
+                class="inline-block	[&:not(:last-child)]:mr-5 cursor-pointer"
                 :class="{ 'text-gray-300': quickViewType }"
                 @click="languagesTypeChange(item.value)"
               >
                 <i
-                  class="fa-regular fa-circle-dot pr-2"
+                  class="fa-regular fa-circle-dot pr-1"
                   :class="item.value === languagesType && !quickViewType ? 'text-primary' : 'text-gray-300'"
                 ></i>
                 ${item.name}
@@ -39,12 +39,12 @@
             <ul class="flex-1">
               <li
                 v-for="item in {{ .Params.filter_ability_json }}"
-                class="inline-block mr-5 cursor-pointer"
+                class="inline-block [&:not(:last-child)]:mr-5 cursor-pointer"
                 :class="{ 'text-gray-300': quickViewType }"
                 @click="abilityTypeChange(item.value)"
               >
               <i
-                class="fa-regular fa-circle-dot pr-2"
+                class="fa-regular fa-circle-dot pr-1"
                 :class="item.value === abilityType && !quickViewType ? 'text-primary' : 'text-gray-300'"
               ></i>
               ${item.name}
@@ -56,7 +56,7 @@
             <ul class="flex-1">
               <li
                 v-for="item in {{ .Params.filter_grade_json }}"
-                class="inline-block mr-5 cursor-pointer"
+                class="inline-block [&:not(:last-child)]:mr-5 cursor-pointer"
                 :class="{ 'text-gray-300': quickViewType }"
                 @click="gradeTypeChange(item.value)"
               >
@@ -73,12 +73,13 @@
             <ul class="flex-1">
               <li
                 v-for="item in {{ .Params.filter_sample_json }}"
-                class="inline-block mr-5 cursor-pointer relative item-sample" @click="sampleTypeChange(item.value)"
+                class="inline-block [&:not(:last-child)]:mr-5 cursor-pointer relative item-sample" @click="sampleTypeChange(item.value)"
               >
                 <i
-                  class="fa-regular fa-circle-dot pr-2"
+                  class="fa-regular fa-circle-dot pr-1"
                   :class="item.value === sampleType ? 'text-primary' : 'text-gray-300'"
-                ></i>${item.name}
+                ></i>
+                ${item.name}
                 <div v-if="item.value === 'highest'" class="tooltip absolute bottom-8 left-0">
                   <div class="tooltip-wrapper w-[320px] bg-black/80 px-3 py-2 rounded text-sm text-white">
                     {{ .Params.highest_tips }}
@@ -94,7 +95,7 @@
             <ul class="flex-1">
               <li
                 v-for="item in {{ .Params.filter_quick_view_json }}"
-                class="inline-block mr-5 cursor-pointer relative item-sample" @click="quickViewTypeChange(item.value)"
+                class="inline-block [&:not(:last-child)]:mr-5 cursor-pointer relative item-sample" @click="quickViewTypeChange(item.value)"
                 :class="{ 'bg-primary text-white rounded px-2': item.value === quickViewType }"
                 >
                 ${item.name}
