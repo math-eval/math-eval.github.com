@@ -100,6 +100,7 @@ import testCountData from "data/testCount.json";
   const app = createApp({
     data() {
       return {
+        fixedColumn: document.body.offsetWidth > 640 ? 'left' : '',
         sampleType: 'best', // best | zero | few
         languagesType: 'all', // all | cn | en
         abilityType: 'all', // all | arithmetics | math_world_problems
