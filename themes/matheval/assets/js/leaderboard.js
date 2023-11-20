@@ -165,7 +165,7 @@ import testCountData from "data/testCount.json";
           return;
         }
         this.gradeType = type;
-        this.delayResetColumn()
+        this.delayResetColumn();
       },
       quickViewTypeChange(type) {
         if (type !== this.quickViewType) {
@@ -177,30 +177,7 @@ import testCountData from "data/testCount.json";
           this.quickViewType = '';
         }
         setTimeout(() => {
-          // 选择数据集速览, 只显示当前选择数据集的列
-          if (this.quickViewType) {
-            // 不显示能力平均, 整体平均, 加权平均, 累加排位
-            this.averageColumn.forEach(item => {
-              this.visibleColumn(item.field, false)
-            })
-            this.datasetColumn.forEach(item => {
-              if (item.field === this.quickViewType) {
-                this.visibleColumn(item.field, true)
-              } else {
-                this.visibleColumn(item.field, false)
-              }
-            })
-            
-            this.$refs.Table.refreshColumn();
-            this.$refs.Table.reloadData(this.tableData);
-            this.$refs.Table.sort(this.quickViewType, 'desc');
-            return;
-          }
-          this.averageColumn.forEach(item => {
-            this.visibleColumn(item.field, true)
-          })
-          this.$refs.Table.refreshColumn();
-          this.resetColumn();
+          this.resetQuickColumn();
         }, 0)
       },
       visibleColumn(field, visible) {
@@ -208,11 +185,40 @@ import testCountData from "data/testCount.json";
       },
       delayResetColumn() {
         setTimeout(() => {
-          this.resetColumn();
+          if (this.quickViewType) {
+            this.resetQuickColumn();
+          } else {
+            this.resetColumn()
+          }
         }, 0)
       },
       arrayMerge(arr1, arr2) {
         return Array.from(new Set([...arr1, ...arr2]));
+      },
+      resetQuickColumn() {
+        // 选择数据集速览, 只显示当前选择数据集的列
+        if (this.quickViewType) {
+          // 不显示能力平均, 整体平均, 加权平均, 累加排位
+          this.averageColumn.forEach(item => {
+            this.visibleColumn(item.field, false)
+          })
+          this.datasetColumn.forEach(item => {
+            if (item.field === this.quickViewType) {
+              this.visibleColumn(item.field, true)
+            } else {
+              this.visibleColumn(item.field, false)
+            }
+          })
+          this.$refs.Table.refreshColumn();
+          this.$refs.Table.reloadData(this.tableData);
+          this.$refs.Table.sort(this.quickViewType, 'desc');
+        } else {
+          this.averageColumn.forEach(item => {
+            this.visibleColumn(item.field, true)
+          })
+          this.$refs.Table.refreshColumn();
+          this.resetColumn();
+        }
       },
       resetColumn() {
         const languagesConfig = this.languagesType === 'all' ? this.arrayMerge(filterConfig['cn'], filterConfig['en']) : filterConfig[this.languagesType]
