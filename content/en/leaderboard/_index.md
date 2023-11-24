@@ -15,7 +15,7 @@ filter_grade_name: Grade
 filter_grade_json: '[{name: "All", value: "all"}, {name: "Primary school", value: "primary"}, {name: "Middle school", value: "middle"}, {name: "High school and above", value: "high"}]'
 
 filter_quick_view_name: New questions
-filter_quick_view_json: '[{name: "GAOKAO-2023", value: "gaokao-2023"}]'
+filter_quick_view_json: '[{name: "GAOKAO(2023)", value: "gaokao-2023"}]'
 
 highest_tips: In cases we tested the models in both zero- and few-shot settings, we report the setting with higher overall  accuracy as 'Overall highest'
 
