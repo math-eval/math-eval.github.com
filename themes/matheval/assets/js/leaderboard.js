@@ -119,6 +119,7 @@ import testCountData from "data/testCount.json";
         filterLabelStyle: {
           width: langType === 'zh' ? '80px' : '120px'
         },
+        isEmpty: false,
       }
     },
     computed: {
@@ -212,6 +213,7 @@ import testCountData from "data/testCount.json";
           this.$refs.Table.refreshColumn();
           this.$refs.Table.reloadData(this.tableData);
           this.$refs.Table.sort(this.quickViewType, 'desc');
+          this.isEmpty = false;
         } else {
           this.averageColumn.forEach(item => {
             this.visibleColumn(item.field, true)
@@ -233,6 +235,12 @@ import testCountData from "data/testCount.json";
         })
         this.$refs.Table.refreshColumn();
         this.updateTableData();
+        const columns = this.$refs.Table.getColumns();
+        if (columns.length === 7) {
+          this.isEmpty = true;
+        } else {
+          this.isEmpty = false;
+        }
       },
 
       headerCellClickEvent ({ column }) {

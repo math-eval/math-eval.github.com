@@ -18,4 +18,6 @@ filter_quick_view_name: 最新试题
 filter_quick_view_json: '[{name: "2023高考", value: "gaokao-2023"}]'
 
 highest_tips: 模型在同一测评集上的 one-shot 和 few-shot 中测评结果的最高分被称作 “两者最好” 
+
+nodata: 暂无数据集，请重新筛选
 ---
