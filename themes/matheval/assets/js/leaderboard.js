@@ -60,6 +60,7 @@ import testCountData from "data/testCount.json";
     { field: 'scq_ch', title: 'TAL-SCQ5K-CN', width: 140, align: 'center', sortable: true, visible: true },
     { field: 'mawps', title: 'MAWPS', width: 80, align: 'center', sortable: true, visible: true },
     { field: 'GAOKAO-BENCH', title: 'GAOKAO(Math)', width: 140, align: 'center', sortable: true, visible: true },
+    { field: 'gaokao-2023', title: 'GAOKAO(2023)', width: 140, align: 'center', sortable: true, visible: true },
     { field: 'asdiv-a', title: 'ASDiv-A', width: 80, align: 'center', sortable: true, visible: true },
     { field: 'cmmlu', title: 'CMMLU(Math)', width: 130, align: 'center', sortable: true, visible: true },
     { field: 'math', title: 'MATH', width: 80, align: 'center', sortable: true, visible: true },
@@ -67,8 +68,6 @@ import testCountData from "data/testCount.json";
     { field: 'mmlu', title: 'MMLU(Math)', width: 140, align: 'center', sortable: true, visible: true },
     { field: 'svamp', title: 'SVAMP', width: 80, align: 'center', sortable: true, visible: true },
     { field: 'math401', title: 'math401-llm', width: 120, align: 'center', sortable: true, visible: true },
-    { field: 'draw', title: 'DRAW1K', width: 100, align: 'center', sortable: true, visible: true },
-    { field: 'hmwp', title: 'HMWP', width: 80, align: 'center', sortable: true, visible: true },
     { field: 'dolphin1878', title: 'Dolphin1878', width: 110, align: 'center', sortable: true, visible: true },
     { field: 'MathQA', title: 'MathQA', width: 90, align: 'center', sortable: true, visible: true },
     { field: 'math23k', title: 'Math23K', width: 90, align: 'center', sortable: true, visible: true },
@@ -79,21 +78,19 @@ import testCountData from "data/testCount.json";
   ]
   const filterConfig = {
     // 中文数据集
-    cn: ['hmwp', 'scq_ch', 'GAOKAO-BENCH', 'cmmlu', 'math23k', 'ape210k', 'BBH', 'AGIEval', 'arith_std', 'math401'],
+    cn: ['scq_ch', 'GAOKAO-BENCH', 'gaokao-2023', 'cmmlu', 'math23k', 'ape210k', 'BBH', 'AGIEval', 'arith_std', 'math401'],
     // 英文数据集
-    en: ['GSM8K', 'math', 'mmlu', 'svamp', 'math401', 'draw', 'dolphin1878', 'scq_en', 'mawps', 'asdiv-a', 'MathQA', 'BBH', 'arith_std'],
+    en: ['GSM8K', 'math', 'mmlu', 'svamp', 'math401', 'dolphin1878', 'scq_en', 'mawps', 'asdiv-a', 'MathQA', 'BBH', 'arith_std'],
     // 应用题
-    math_world_problems: ['GSM8K', 'math', 'mmlu', 'svamp', 'draw', 'hmwp', 'dolphin1878', 'scq_en', 'scq_ch', 'mawps', 'GAOKAO-BENCH', 'asdiv-a', 'cmmlu', 'MathQA', 'math23k', 'ape210k', 'AGIEval'],
+    math_world_problems: ['GSM8K', 'math', 'mmlu', 'svamp', 'dolphin1878', 'scq_en', 'scq_ch', 'mawps', 'GAOKAO-BENCH', 'gaokao-2023', 'asdiv-a', 'cmmlu', 'MathQA', 'math23k', 'ape210k', 'AGIEval'],
     // 算术
     arithmetics: ['math401', 'BBH', 'arith_std'],
     // 小学
-    primary: [],
+    primary: ['ape210k', 'math23k', 'MathQA', 'asdiv-a', 'mawps', 'scq_ch', 'scq_en', 'dolphin1878', 'svamp', 'GSM8K', 'math401', 'BBH'],
     // 初中
-    middle: [],
-    // 高中
-    high: [],
-    // 大学
-    college: []
+    middle: ['arith_std'],
+    // 高中及以上
+    high: ['AGIEval', 'cmmlu', 'GAOKAO-BENCH', 'mmlu', 'math', 'gaokao-2023'],
   }
 
   const { createApp } = Vue
@@ -118,7 +115,10 @@ import testCountData from "data/testCount.json";
           sortMethod: this.customSortMethod
         },
         loading: false,
-        columns: []
+        columns: [],
+        filterLabelStyle: {
+          width: langType === 'zh' ? '80px' : '120px'
+        },
       }
     },
     computed: {
@@ -225,7 +225,7 @@ import testCountData from "data/testCount.json";
         const abilityConfig = this.abilityType === 'all' ? this.arrayMerge(filterConfig['arithmetics'], filterConfig['math_world_problems']) : filterConfig[this.abilityType]
         const gradeConfig = this.gradeType === 'all' ? this.arrayMerge(filterConfig['primary'], filterConfig['middle'], filterConfig['high'], filterConfig['college']) : filterConfig[this.gradeType]
         datasetColumn.forEach(item => {
-          if (languagesConfig.includes(item.field) && abilityConfig.includes(item.field)) {
+          if (languagesConfig.includes(item.field) && abilityConfig.includes(item.field) && gradeConfig.includes(item.field)) {
             this.visibleColumn(item.field, true)
           } else {
             this.visibleColumn(item.field, false)
@@ -305,7 +305,7 @@ import testCountData from "data/testCount.json";
           const mathWorldProblemsColumns = columns.filter(item => filterConfig.math_world_problems.includes(item.field));
           // console.log('updateAbilityAverage', arithmeticsColumns, mathWorldProblemsColumns)
           this.tableData.forEach((item) => {
-            let arithmeticsCount = 0; 
+            let arithmeticsCount = 0;
             let mathWorldProblemsCount = 0;
             arithmeticsColumns.forEach((column) => {
               arithmeticsCount += item[column.field] * 10000
@@ -313,9 +313,14 @@ import testCountData from "data/testCount.json";
             mathWorldProblemsColumns.forEach((column) => {
               mathWorldProblemsCount += item[column.field] * 10000
             })
-            arithmeticsAverage = (Math.round(arithmeticsCount / arithmeticsColumns.length) / 10000).toFixed(4);
-            mathWorldProblemsAverage = (Math.round(mathWorldProblemsCount / mathWorldProblemsColumns.length) / 10000).toFixed(4);
-            item.ability_average = ((Number(arithmeticsAverage) + Number(mathWorldProblemsAverage)) / 2).toFixed(4);
+            // console.log('updateAbilityAverage', arithmeticsCount, mathWorldProblemsCount)
+            if (arithmeticsCount && mathWorldProblemsCount) {
+              arithmeticsAverage = (Math.round(arithmeticsCount / arithmeticsColumns.length) / 10000).toFixed(4);
+              mathWorldProblemsAverage = (Math.round(mathWorldProblemsCount / mathWorldProblemsColumns.length) / 10000).toFixed(4);
+              item.ability_average = ((Number(arithmeticsAverage) + Number(mathWorldProblemsAverage)) / 2).toFixed(4);
+            } else {
+              item.ability_average = (Math.round((arithmeticsCount || mathWorldProblemsCount) / datasetColumns.length) / 10000).toFixed(4);
+            }
           })
         } else {
           this.tableData.forEach((item) => {

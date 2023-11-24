@@ -12,10 +12,10 @@ filter_ability_name: Ability
 filter_ability_json: '[{name: "All", value: "all"}, {name: "Math world problems", value: "math_world_problems"}, {name: "Arithmetics", value: "arithmetics"}]'
 
 filter_grade_name: Grade
-filter_grade_json: '[{name: "All", value: "all"}, {name: "Primary", value: "primary"}, {name: "Middle", value: "middle"}, {name: "High", value: "high"}, {name: "College", value: "college"}]'
+filter_grade_json: '[{name: "All", value: "all"}, {name: "Primary school", value: "primary"}, {name: "Middle school", value: "middle"}, {name: "High school and above", value: "high"}]'
 
-filter_quick_view_name: Datasets
-filter_quick_view_json: '[{name: "GAOKAO-BENCH", value: "GAOKAO-BENCH"}]'
+filter_quick_view_name: New questions
+filter_quick_view_json: '[{name: "GAOKAO-2023", value: "gaokao-2023"}]'
 
 highest_tips: In cases we tested the models in both zero- and few-shot settings, we report the setting with higher overall  accuracy as 'Overall highest'
 ---

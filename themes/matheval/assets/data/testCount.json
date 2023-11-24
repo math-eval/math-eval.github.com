@@ -9,8 +9,6 @@
   "asdiv-a":122,
   "cmmlu":499,
   "dolphin1878":187,
-  "draw":200,
-  "hmwp":550,
   "math":5000,
   "math23k":2317,
   "math401":393,
@@ -18,5 +16,6 @@
   "mmlu":847,
   "scq_ch":1960,
   "scq_en":1878,
-  "svamp":1000
+  "svamp":1000,
+  "gaokao-2023": 159
 }
