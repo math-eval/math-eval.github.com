@@ -193,8 +193,12 @@ import testCountData from "data/testCount.json";
           }
         }, 0)
       },
-      arrayMerge(arr1, arr2) {
-        return Array.from(new Set([...arr1, ...arr2]));
+      arrayMerge(arrs) {
+        const arr = []
+        arrs.forEach(item => {
+          arr.push(...item)
+        })
+        return Array.from(new Set(arr));
       },
       resetQuickColumn() {
         // 选择数据集速览, 只显示当前选择数据集的列
@@ -223,9 +227,9 @@ import testCountData from "data/testCount.json";
         }
       },
       resetColumn() {
-        const languagesConfig = this.languagesType === 'all' ? this.arrayMerge(filterConfig['cn'], filterConfig['en']) : filterConfig[this.languagesType]
-        const abilityConfig = this.abilityType === 'all' ? this.arrayMerge(filterConfig['arithmetics'], filterConfig['math_world_problems']) : filterConfig[this.abilityType]
-        const gradeConfig = this.gradeType === 'all' ? this.arrayMerge(filterConfig['primary'], filterConfig['middle'], filterConfig['high'], filterConfig['college']) : filterConfig[this.gradeType]
+        const languagesConfig = this.languagesType === 'all' ? this.arrayMerge([filterConfig['cn'], filterConfig['en']]) : filterConfig[this.languagesType]
+        const abilityConfig = this.abilityType === 'all' ? this.arrayMerge([filterConfig['arithmetics'], filterConfig['math_world_problems']]) : filterConfig[this.abilityType]
+        const gradeConfig = this.gradeType === 'all' ? this.arrayMerge([filterConfig['primary'], filterConfig['middle'], filterConfig['high']]) : filterConfig[this.gradeType]
         datasetColumn.forEach(item => {
           if (languagesConfig.includes(item.field) && abilityConfig.includes(item.field) && gradeConfig.includes(item.field)) {
             this.visibleColumn(item.field, true)
