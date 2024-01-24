@@ -129,11 +129,21 @@ import testCountData from "data/testCount.json";
     },
     mounted() {
       this.$nextTick(() => {
+        this.resetTableHeight();
         this.columns = this.$refs.Table.getColumns();
         this.updateTableData();
       })
+      window.addEventListener('resize', this.resetTableHeight);
     },
     methods: {
+      resetTableHeight() {
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        const headerHeight = document.querySelector('#header').offsetHeight;
+        const filterHeight = document.querySelector('#filterWrapper').offsetHeight;
+        const tableHeight = windowHeight - headerHeight - filterHeight - 40;
+        console.log('resetTableHeight', tableHeight)
+        document.querySelector('#tableWrapper').style.height = tableHeight + 'px';
+      },
       sampleTypeChange(type) {
         this.sampleType = type;
         if (type === 'best') {
