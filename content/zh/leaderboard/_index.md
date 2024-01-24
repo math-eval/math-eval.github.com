@@ -17,6 +17,10 @@ filter_grade_json: '[{name: "全部", value: "all"}, {name: "小学", value: "pr
 filter_quick_view_name: 最新试题
 filter_quick_view_json: '[{name: "2023高考", value: "gaokao-2023"}]'
 
+evaluation_settings_name: 设置说明
+evaluation_settings_content: 测评实验设置
+evaluation_settings_url: /leaderboard/evaluation-experiment-settings
+
 highest_tips: 模型在同一测评集上的 one-shot 和 few-shot 中测评结果的最高分被称作 “两者最好” 
 
 nodata: 暂无数据集，请重新筛选

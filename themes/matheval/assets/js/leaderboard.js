@@ -32,7 +32,7 @@ import testCountData from "data/testCount.json";
   const weightedAverageName = langType === 'zh' ? '加权平均' : 'Weighted average';
   const cumulativeRankingName = langType === 'zh' ? '累加排位' : 'Cumulative ranking';
   const abilityAverageTips = {
-    content: langType === 'zh' ? '分别计算模型在应用题和算数类型各个数据集上的平均准确率，然后取两者的平均值作为最终能力平均准确率。该数值越大代表模型性能越好。' : 'Calculate the average accuracy of the model on various datasets of application problems and arithmetic types respectively, and then take the average of the two as the final average accuracy of ability. The larger this value, the better the performance of the model.'
+    content: langType === 'zh' ? '分别计算模型在应用题和算数类型各个数据集上的平均准确率，然后取两者的平均值作为最终能力平均准确率。当只选择应用题或算术能力维度的时候，能力平均取算数平均值作为能力平均值。该数值越大代表模型性能越好。' : 'Calculate the average accuracy of the model on various datasets of application problems and arithmetic types respectively, and then take the average of the two as the final average accuracy of ability. When opting for either the math word problem or arithmetic dimension, the mean of the scores is calculated as the proficiency average. The larger this value, the better the performance of the model.'
   }
   const overallAverageTips = {
     content: langType === 'zh' ? '将该模型在n个数据集上的准确率直接算均值。该数值越大代表模型性能越好。' : 'Calculate the average accuracy of the model on n datasets directly. A higher value indicates better model performance.'

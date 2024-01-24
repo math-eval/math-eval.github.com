@@ -16,7 +16,7 @@
         </div>
 
         <!-- Filters -->
-        <div class="mb-3 px-4 py-3 lg:px-6 lg:py-4 rounded shadow border border-slate-100 cursor-default select-none">
+        <div class="mb-4 px-4 py-3 lg:px-6 lg:py-4 rounded shadow border border-slate-100 cursor-default select-none">
           <div class="flex mb-2">
             <div class="font-bold" :style="filterLabelStyle">{{ .Params.filter_languages_name }}</div>
             <ul class="flex-1">
@@ -99,7 +99,7 @@
             </ul>
             
           </div>
-          <div class="flex items-center">
+          <div class="flex items-center mt-2">
             <div class="font-bold" :style="filterLabelStyle">{{ .Params.filter_quick_view_name }}</div>
             <ul class="flex-1">
               <li
@@ -110,104 +110,29 @@
                 ${item.name}
               </li>
             </ul>
-            
           </div>
+          <div class="flex items-center mt-2">
+            <div class="font-bold" :style="filterLabelStyle">{{ .Params.evaluation_settings_name }}</div>
+            <div class="flex-1">
+              <a href="{{ .Params.evaluation_settings_url }}" target="_blank" class="hover:text-primary">
+                {{ .Params.evaluation_settings_content }} <i class="fa-solid fa-up-right-from-square text-xs"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- <div class="mb-3">
+            {{ if eq (string .Site.Language.Lang) (string "zh") }}
+              <a href="/leaderboard/evaluation-experiment-settings" target="_blank" class="text-gray-500 hover:text-primary text-sm">
+                查看测评实验室设置 <i class="fa-solid fa-up-right-from-square text-xs"></i>
+              </a>
+            {{ else }}
+              <a href="/en/leaderboard/evaluation-experiment-settings" target="_blank" class="text-gray-500 hover:text-primary text-sm">
+                Evaluation Experiment Settings <i class="fa-solid fa-up-right-from-square text-xs"></i>
+              </a>
+            {{ end }}
+          </div> -->
         </div>
         <!-- /Filters -->
-
-        <!-- Quota -->
-        {{ if eq (string .Site.Language.Lang) (string "zh") }}
-        <div class="mb-3 px-4 py-3 lg:px-6 lg:py-4 rounded shadow border border-slate-100 text-sm">
-          <div class="mb-3 text-lg font-bold">
-            测评综合指标
-          </div>
-          <div class="flex mb-2">
-            <div class="w-[75px] font-bold">能力平均：</div>
-            <div class="flex-1">
-              <span v-if="abilityType === 'overall_average'">分别计算模型在应用题和算数类型各个数据集上的平均准确率，然后取两者的平均值作为最终能力平均准确率。该数值越大代表模型性能越好。</span>
-              <span v-else>当只选择应用题或算术能力维度的时候，能力平均取算数平均值作为能力平均值。该数值越大代表模型性能越好。</span>
-            </div>
-          </div>
-          <div class="flex mb-2">
-            <div class="w-[75px] font-bold">整体平均：</div>
-            <div class="flex-1">将该模型在n个数据集上的准确率直接算均值。该数值越大代表模型性能越好。</div>
-          </div>
-          <div class="flex mb-2">
-            <div class="w-[75px] font-bold">加权平均：</div>
-            <div class="flex-1">用该模型在n个数据集上所有做对题目数除以所有数据集的总题目数。该数值越大代表模型性能越好。</div>
-          </div>
-          <div class="flex">
-            <div class="w-[75px] font-bold">累加排位：</div>
-            <div class="flex-1">将该模型在n个数据集上的准确率排名的排序名次累加。该数值越小代表模型性能越好。</div>
-          </div>
-        </div>
-        {{ else }}
-        <div class="mb-3 px-4 py-3 lg:px-6 lg:py-4 rounded shadow border border-slate-100 text-sm">
-          <div class="mb-3 text-lg font-bold">
-            Comprehensive evaluation indicators
-          </div>
-          <div class="flex mb-2">
-            <div class="w-[140px] font-bold">Ability average:</div>
-            <div class="flex-1">
-              <span v-if="abilityType === 'overall_average'">Calculate the average accuracy of the model on various datasets of application problems and arithmetic types respectively, and then take the average of the two as the final average accuracy of ability. A higher value indicates better model performance.</span>
-              <span v-else>When opting for either the math word problem or arithmetic dimension, the mean of the scores is calculated as the proficiency average. A higher numerical value indicates better model performance. We take the arithmetic average of all the datasets corresponding to the selected ability dimension as the final average accuracy of ability. </span>
-            </div>
-          </div>
-          <div class="flex mb-2">
-            <div class="w-[140px] font-bold">Overall average:</div>
-            <div class="flex-1">Calculate the average accuracy of the model on n datasets directly. A higher value indicates better model performance.</div>
-          </div>
-          <div class="flex mb-2">
-            <div class="w-[140px] font-bold">Weighted average:</div>
-            <div class="flex-1">The number of correct questions of the model on n datasets is divided by the total number of questions in all datasets. A higher value indicates better model performance.</div>
-          </div>
-          <div class="flex">
-            <div class="w-[140px] font-bold">Cumulative ranking:</div>
-            <div class="flex-1">Add up the ranking positions of the model's accuracy on n datasets. A lower value indicates better model performance.</div>
-          </div>
-        </div>
-        {{ end }}
-        <!-- /Quota -->
-
-        <!-- Description -->
-        {{ if eq (string .Site.Language.Lang) (string "zh") }}
-        <div class="mb-4 px-4 py-3 lg:px-6 lg:py-4 rounded shadow border border-slate-100 text-sm">
-          <div class="mb-3 text-lg font-bold">
-            测评实验设置
-          </div>
-          <div class="flex mb-2">
-            <div class="w-[55px] font-bold">说明1：</div>
-            <div class="flex-1">我们将一句简单的“解题指令”与题干本身进行拼接，作为输入，让大模型进行推理和解题。<a href="https://github.com/math-eval/MathEval/blob/main/eval_prompt.md" target="_blank" class="text-primary hover:underline hover:underline-offset-2">【详情】<i class="fa-solid fa-up-right-from-square text-xs"></i></a></div>
-          </div>
-          <div class="flex mb-2">
-            <div class="w-[55px] font-bold">说明2：</div>
-            <div class="flex-1">我们用GPT-4来进行模型预测答案的抽取，相比较于正则表达式的抽取在精准率上有明显的提升，对于没有正常抽取的结果，我们再用正则表达式进行补充。在进行抽取答案和标准答案的比对工作时，我们也使用了GPT-4来进行比对，它可以统一多种表达形式，并给出精准的匹配结果，从而计算正确率。此处无人工核验环节。<a href="https://github.com/math-eval/MathEval/blob/main/extract_res_regex.md" target="_blank" class="text-primary hover:underline hover:underline-offset-2">【详情】<i class="fa-solid fa-up-right-from-square text-xs"></i></a></div>
-          </div>
-          <div class="flex">
-            <div class="w-[55px] font-bold">说明3：</div>
-            <div class="flex-1">对于MMLU(math)选择题，我们同时用直接生成答案和依据困惑度进行选项预测两种方式进行实验，并用较好结果作为榜单中的评测结果。</div>
-          </div>
-        </div>
-        {{ else }}
-        <div class="mb-4 px-4 py-3 lg:px-6 lg:py-4 rounded shadow border border-slate-100 text-sm">
-          <div class="mb-4 text-lg font-bold">
-            Evaluation Experiment Settings
-          </div>
-          <div class="flex mb-2">
-            <div class="w-[55px] font-bold">Note 1:</div>
-            <div class="flex-1">We will concatenate a simple "solution instruction" with the question as the input to the large model for it to infer and solve the question. <a href="https://github.com/math-eval/MathEval/blob/main/eval_prompt.md" target="_blank" class="text-primary hover:underline hover:underline-offset-2">[Details]<i class="fa-solid fa-up-right-from-square text-xs ml-1"></i></a></div>
-          </div>
-          <div class="flex mb-2">
-            <div class="w-[55px] font-bold">Note 2:</div>
-            <div class="flex-1">We employ GPT-4 for answer extraction, resulting in a substantial enhancement in precision when compared to the conventional regular expression-based extraction method. In cases where GPT-4 extraction does not yield the desired results, we supplement it with results obtained through regular expression-based extraction. Furthermore, we harness the capabilities of GPT-4 for comparing the extracted answers with the standard responses, enabling us to handle diverse expression forms. This facilitates the generation of precise matching results, thereby allowing for an accurate assessment of correctness. It is important to note that this workflow does not involve any manual verification. <a href="https://github.com/math-eval/MathEval/blob/main/extract_res_regex.md" target="_blank" class="text-primary hover:underline hover:underline-offset-2">[Details]<i class="fa-solid fa-up-right-from-square text-xs ml-1"></i></a></div>
-          </div>
-          <div class="flex">
-            <div class="w-[55px] font-bold">Note 3:</div>
-            <div class="flex-1">For multiple-choice MMLU(math), we conducted experiments in two ways: directly generating answers and predicting options based on perplexity. The better results are used as the evaluation results in the leaderboard.</div>
-          </div>
-        </div>
-        {{ end }}
-        <!-- /Description -->
 
         <div v-if="isEmpty" class="pt-[80px] pb-[200px] text-center">
           <div class="flex justify-center mb-4">
