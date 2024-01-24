@@ -140,8 +140,10 @@ import testCountData from "data/testCount.json";
         const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
         const headerHeight = document.querySelector('#header').offsetHeight;
         const filterHeight = document.querySelector('#filterWrapper').offsetHeight;
-        const tableHeight = windowHeight - headerHeight - filterHeight - 40;
-        console.log('resetTableHeight', tableHeight)
+        let tableHeight = windowHeight - headerHeight - filterHeight - 40;
+        if (tableHeight < 200) {
+          tableHeight = 300;
+        }
         document.querySelector('#tableWrapper').style.height = tableHeight + 'px';
       },
       sampleTypeChange(type) {
