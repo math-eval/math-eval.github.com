@@ -141,7 +141,6 @@ import testCountData from "data/testCount.json";
         const headerHeight = document.querySelector('#header').offsetHeight;
         const filterHeight = document.querySelector('#filterWrapper').offsetHeight;
         let tableHeight = windowHeight - headerHeight - filterHeight - 40;
-        console.log(tableHeight)
         if (tableHeight < 520) {
           tableHeight = 520;
         }

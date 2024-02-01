@@ -172,14 +172,11 @@
     <div class="flex justify-center">
       <div class="lg:col-8 xl:col-7 text-center leading-6 text-gray-500">
       {{ if eq (string .Site.Language.Lang) (string "zh") }}
-        本平台由智慧教育国家新一代人工智能开放创新平台、科技公司好未来免费提供算力支持。如需加入测评或者洽谈合作，请将您的需求和问题发送至 <a href="mailto:matheval.ai@gmail.com" class="text-primary hover:underline hover:underline-offset-4">matheval.ai@gmail.com</a> 邮箱。
+        本平台由智慧教育国家新一代人工智能开放创新平台免费提供算力支持。如需加入测评或者洽谈合作，请将您的需求和问题发送至 <a href="mailto:matheval.ai@gmail.com" class="text-primary hover:underline hover:underline-offset-4">matheval.ai@gmail.com</a> 邮箱。
       {{ else }}
-      The MathEval benchmark is provided with computing power support free of charge by Beijing-based TAL Education Group, the contractor of the Nationwide smart education platform for Open Innovation of New-Generation AI. If you wish to participate in the evaluation or discuss cooperation, please send your requirements and questions to the email address <a href="mailto:matheval.ai@gmail.com" class="text-primary hover:underline hover:underline-offset-4">matheval.ai@gmail.com</a> .
+      The MathEval benchmark is provided with free computing power support by the Nationwide smart education platform for Open Innovation of New-Generation AI. If you wish to participate in the evaluation or discuss cooperation, please send your requirements and questions to the email address <a href="mailto:matheval.ai@gmail.com" class="text-primary hover:underline hover:underline-offset-4">matheval.ai@gmail.com</a> .
       {{ end }}
       </div>
-    </div>
-    <div class="flex justify-center mt-4">
-      {{ partial "image" (dict "Src" .Params.contact.image "Alt" "TAL" "Loading" "eager" "Class" "w-[150px] lg:w-[200px]") }}
     </div>
   </div>
 </div>
