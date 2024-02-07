@@ -99,11 +99,11 @@ model:
       team: 复旦大学
       link: https://huggingface.co/fnlp/moss-moon-003-base
 
-    - title: 文心一言(v2.2.0)
+    - title: 文心一言
       team: 百度
       link: https://yiyan.baidu.com/
 
-    - title: 讯飞星火(v2.0)
+    - title: 讯飞星火
       team: 科大讯飞
       link: https://xinghuo.xfyun.cn/
 

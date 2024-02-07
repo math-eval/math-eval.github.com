@@ -301,11 +301,14 @@ import testCountData from "data/testCount.json";
 
       formatterName({ cellValue }) {
         const names = {
-          'wenxin': '文心一言',
+          'wenxin2': 'ERINE 2.0',
+          'wenxin4': 'ERINE 4.0',
           'GPT4': 'GPT-4',
           'GPT35': 'GPT-3.5',
           'mathgpt': 'MathGPT',
-          'spark': '讯飞星火',
+          'mathgpt-0206': 'MathGPT-0206',
+          'spark': '讯飞星火 V2.0',
+          'spark-3.5': '讯飞星火 V3.5',
           'internlm-chat-20B': 'Internlm-chat-20B',
           'chatglm2-6B': 'Chatglm2-6B',
           'moss-moon-003-base': 'Moss-moon-003-base',
