@@ -305,7 +305,7 @@ import testCountData from "data/testCount.json";
           'wenxin4': '文心一言4.0',
           'GPT4': 'GPT-4',
           'GPT35': 'GPT-3.5',
-          'mathgpt-0206': 'MathGPT',
+          'mathgpt-0223': 'MathGPT',
           'spark': '讯飞星火V2.0',
           'spark-3.5': '讯飞星火V3.5',
           'internlm-chat-20B': 'Internlm-chat-20B',
