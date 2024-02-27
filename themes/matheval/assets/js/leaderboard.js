@@ -120,12 +120,29 @@ import testCountData from "data/testCount.json";
           width: langType === 'zh' ? '80px' : '120px'
         },
         isEmpty: false,
+        tooltipConfig: {
+          showAll: true,
+          enterable: true,
+          contentMethod: ({ type, column, row, items, _columnIndex }) => {
+            const { field } = column
+            if (field === 'name') {
+              if (row && row.name === 'mathgpt-0226') {
+                return this.mathGPTHelpTips
+              } else {
+                return ''
+              }
+            }
+          }
+        }
       }
     },
     computed: {
       datasetList() {
         return this.datasetColumn.map(item => item.field)
-      }
+      },
+      mathGPTHelpTips() {
+        return langType === 'zh' ? '在MathGPT的推理过程中对每一步的推理结果加入了训练过的数学领域的step-level verifier' : 'In the reasoning process of MathGPT, a trained step-level verifier for the mathematical domain has been integrated into each step of the reasoning results.'
+      },
     },
     mounted() {
       this.$nextTick(() => {
@@ -305,7 +322,8 @@ import testCountData from "data/testCount.json";
           'wenxin4': '文心一言4.0',
           'GPT4': 'GPT-4',
           'GPT35': 'GPT-3.5',
-          'mathgpt-0226': 'MathGPT',
+          'mathgpt-0226': 'MathGPT-V<i class="vxe-cell-help-icon vxe-icon-question-circle-fill" style="font-size: 14px; margin-left: 3px;"></i>',
+          'mathgpt-0206': 'MathGPT',
           'spark': '讯飞星火V2.0',
           'spark-3.5': '讯飞星火V3.5',
           'internlm-chat-20B': 'Internlm-chat-20B',
