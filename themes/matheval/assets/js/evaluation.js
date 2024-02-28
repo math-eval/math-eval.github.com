@@ -189,7 +189,7 @@
         this.submiting = true;
         const data = this.getData();
         console.log(data)
-        fetch('https://atms-api.100tal.com/app/matheval/invite/submit', {
+        fetch('https://matheval-api.vercel.app/app/matheval/invite/submit', {
           method: 'POST',
           body: JSON.stringify(data),
           headers: {
@@ -198,7 +198,7 @@
         }).then(async response => {
           const res = await response.json();
           this.submiting = false;
-          if (res.code !== 1000) {
+          if (res.code !== 0) {
             this.setErrorMsg(res.message);
             return;
           }
