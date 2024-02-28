@@ -189,7 +189,7 @@
         this.submiting = true;
         const data = this.getData();
         console.log(data)
-        fetch('https://matheval-api.vercel.app/app/matheval/invite/submit', {
+        fetch('https://api.matheval.ai/app/matheval/invite/submit', {
           method: 'POST',
           body: JSON.stringify(data),
           headers: {
