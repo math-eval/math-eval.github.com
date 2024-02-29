@@ -2,7 +2,7 @@
 # Banner
 banner:
   title: Evaluation of LLMs on math
-  content: MathEval is a benchmark dedicated to the holistic evaluation on mathematical capacities of LLMs, consisting of 19 evaluation datasets in various mathematical fields and over 70,000 math problems. The aim is to comprehensively evaluate the mathematical problem-solving abilities of LLMs in various grades and difficulties, including arithmetic, primary and secondary school competitions, and some advanced branches of mathematics. MathEval can not only serve as a one-stop reference for horizontal comparison of mathematical abilities among LLMs, but also provides hints and insights on how to further improve the mathematical abilities of LLMs in the future.
+  content: MathEval is a benchmark dedicated to the holistic evaluation on mathematical capacities of LLMs, consisting of 19 evaluation datasets in various mathematical fields and nearly 30,000 math problems. The aim is to comprehensively evaluate the mathematical problem-solving abilities of LLMs in various grades and difficulties, including arithmetic, primary and secondary school competitions, and some advanced branches of mathematics. MathEval can not only serve as a one-stop reference for horizontal comparison of mathematical abilities among LLMs, but also provides hints and insights on how to further improve the mathematical abilities of LLMs in the future.
   image: /images/banner.png
   button:
     enable: true
@@ -134,6 +134,10 @@ model:
     - title: MetaMath-70B
       team: 剑桥大学、南方科技大学、香港科技大学、华为诺亚方舟实验室、艾伦·图灵研究院、马克斯·普朗克智能系统研究所
       link: https://meta-math.github.io/
+
+    - title: GLM4
+      team: 智谱AI、清华大学KEG实验室
+      link: https://chatglm.cn
 
 # Dataset
 dataset:
