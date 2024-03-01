@@ -2,7 +2,7 @@
 {{ range site.Menus.main }}
   {{ $menuURL := .URL | absLangURL }}
   {{ $pageURL:= $currentPage.Permalink | absLangURL }}
-  {{ $active := eq $menuURL $pageURL }}
+  {{ $active := and (eq $menuURL $pageURL) (not (or (eq .Name "联系我们") (eq .Name "Contact"))) }}
   {{ if .HasChildren }}
     <li class="nav-item nav-dropdown group relative">
       <span
@@ -45,9 +45,9 @@
       </ul>
     </li>
   {{ else }}
-    <li class="nav-item">
+    <li class="nav-item {{ if $active }}active{{- end -}}">
       <a
-        class="nav-link {{ if $active }}active{{- end -}}"
+        class="nav-link"
         {{ if findRE `^http` .URL }}
           target="_blank" rel="noopener"
         {{ end }}

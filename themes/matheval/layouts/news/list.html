@@ -1,0 +1,26 @@
+{{ define "main" }}
+  <section class="mt-[100px] mb-[100px]">
+    <div class="container flex justify-center">
+      <div>
+        <h1 class="h4 mb-8 text-center">
+          {{ .Title }}
+        </h1>
+        <div class="relative border-l-2 border-gray-200 pl-[30px] pt-[20px] pb-[20px] ml-[150px] cursor-default">
+          {{ with site.GetPage "news" }}
+          <div>
+            <ul>
+              {{ range .Params.news }}
+              <li class="text-gray-500 relative mb-[30px] last:mb-0">
+                <span class="absolute -left-[38px] top-[5px] block w-[16px] h-[16px] rounded-full bg-white border-2 border-gray-200"></span>
+                <span class="absolute -left-[150px] ">{{ .date }}</span>
+                <span>{{ .title }}</span>
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

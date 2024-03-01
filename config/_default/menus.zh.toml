@@ -7,21 +7,26 @@ url = "/"
 weight = 1
 
 [[main]]
+name = "最新动态"
+url = "news/"
+weight = 2
+
+[[main]]
 name = "测评榜单"
 url = "leaderboard/"
-weight = 2
+weight = 3
 
 [[main]]
 name = "测评数据集"
 url = "dataset/"
-weight = 3
+weight = 4
 
 [[main]]
 name = "讨论区"
 url = "https://github.com/math-eval/MathEval/discussions"
-weight = 4
+weight = 5
 
 [[main]]
 name = "联系我们"
 url = "/#contact"
-weight = 5
+weight = 6

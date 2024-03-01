@@ -32,7 +32,9 @@ input#nav-toggle:checked ~ #nav-menu {
 }
 
 // .nav-item {
-//   @apply mx-3;
+//   &.active {
+//     @apply border-b-2 border-b-primary;
+//   }
 // }
 
 .nav-link {

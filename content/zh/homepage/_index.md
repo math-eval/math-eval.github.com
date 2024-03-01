@@ -13,6 +13,12 @@ banner:
     label: Github
     link: https://github.com/math-eval
 
+# News
+news:
+  title: 最新动态
+  more: 更多动态
+  link: /news
+
 # Features
 features:
   - title: 数学测评基准五大亮点

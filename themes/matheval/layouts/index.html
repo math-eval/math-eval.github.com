@@ -1,11 +1,11 @@
 {{ define "main" }}
 {{ with site.GetPage "homepage" }}
 <!-- Banner -->
-{{ with .Params.banner }}
 <section class="section-sm">
   <div class="container">
-    <div class="grid grid-cols-8 lg:gap-14">
-      <div class="text-center items-center col-span-8 lg:col-span-5 md:text-left lg:text-left">
+    <div class="grid grid-cols-10 lg:gap-14">
+      {{ with .Params.banner }}
+      <div class="text-center items-center col-span-10 lg:col-span-6 md:text-left lg:text-left">
         <h1 class="mb-4">
           {{ .title | markdownify }}
         </h1>
@@ -27,13 +27,40 @@
         {{ end }}
         {{ end }}
       </div>
-      <div class="hidden items-center lg:flex lg:col-span-3">
-        {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Loading" "eager" "Class" "mx-auto" "Size" "800x") }}
+      {{ end }}
+      {{ with .Params.news }}
+      <div class="col-span-10 lg:col-span-4">
+        <div class="mt-6">
+          <div class="text-base mb-6 text-lg font-semibold">
+            {{ .title }}
+          </div>
+          {{ with site.GetPage "news" }}
+          <div>
+            <ul class="leading-8">
+              {{ $news := first 5 .Params.news }}
+              {{ range $news }}
+              <li>
+                <a href="{{ .link }}" class="block text-gray-500 hover:text-primary">
+                  <span class="mr-2">{{ .date }}</span>
+                  <span>{{ .title }}</span>
+                </a>
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+          {{ end }}
+          <div class="flex mt-2">
+            <a href="{{ .link }}" class="block hover:underline hover:underline-offset-4 text-gray-500 hover:text-primary">
+              <span>{{ .more }}</span>
+              <span class="fa-solid fa-arrow-right"></span>
+            </a>
+          </div>
+        </div>
       </div>
+      {{ end }}
     </div>
   </div>
 </section>
-{{ end }}
 <!-- /Banner -->
 
 <!-- Logo -->
