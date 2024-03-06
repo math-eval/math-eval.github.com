@@ -2,6 +2,14 @@
 title: 最新动态
 # News
 news:
+  - title: Qwen-72B-Chat大模型加入测评
+    date: 2024/03/06
+    link: /news
+
+  - title: Qwen-72B大模型加入测评
+    date: 2024/03/06
+    link: /news
+
   - title: 学而思九章大模型加入测评
     date: 2024/02/26
     link: /news

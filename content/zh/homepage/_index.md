@@ -89,7 +89,7 @@ model:
       team: 好未来教育集团
       link: https://www.mathgpt.com/
 
-    - title: Qwen-14B
+    - title: Qwen
       team: 阿里云
       link: https://github.com/QwenLM/Qwen
 

@@ -18,26 +18,6 @@ news:
   title: News
   more: Read more
   link: /en/news
-  list:
-    - title: 学而思九章大模型加入测评
-      date: 2024/02/26
-      link: /en/news
-    
-    - title: 智谱GLM4大模型加入测评
-      date: 2024/02/22
-      link: /en/news
-    
-    - title: 讯飞星火V3.5大模型加入测评
-      date: 2024/02/05
-      link: /en/news
-    
-    - title: 文心一言4.0大模型加入测评
-      date: 2024/02/05
-      link: /en/news
-    
-    - title: MathEval大模型数学能力测评官网上线
-      date: 2023/11/01
-      link: /en/news
 
 # Features
 features:
@@ -109,7 +89,7 @@ model:
       team: 好未来教育集团
       link: https://www.mathgpt.com/
 
-    - title: Qwen-14B
+    - title: Qwen
       team: 阿里云
       link: https://github.com/QwenLM/Qwen
 
