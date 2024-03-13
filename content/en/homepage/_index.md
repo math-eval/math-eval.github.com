@@ -85,6 +85,18 @@ model:
       team: 上海人工智能实验室（上海AI实验室）、商汤科技、香港中文大学、复旦大学、上海交通大学发布
       link: https://internlm.org/
 
+    - title: InternLM2-base-20B
+      team: 上海人工智能实验室（上海AI实验室）、商汤科技、香港中文大学、复旦大学、上海交通大学发布
+      link: https://internlm.org/
+
+    - title: InternLM2-chat-20B
+      team: 上海人工智能实验室（上海AI实验室）、商汤科技、香港中文大学、复旦大学、上海交通大学发布
+      link: https://internlm.org/
+
+    - title: InternLM2-math-20B
+      team: 上海人工智能实验室（上海AI实验室）、商汤科技、香港中文大学、复旦大学、上海交通大学发布
+      link: https://internlm.org/
+
     - title: MathGPT
       team: 好未来教育集团
       link: https://www.mathgpt.com/

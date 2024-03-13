@@ -312,7 +312,10 @@ import testCountData from "data/testCount.json";
           'chatglm2-6B': 'Chatglm2-6B',
           'moss-moon-003-base': 'Moss-moon-003-base',
           'llemma_7B': 'Llemma-7B',
-          'llemma_34B': 'Llemma-34B'
+          'llemma_34B': 'Llemma-34B',
+          'internlm2-math-20B': 'InternLM2-math-20B',
+          'internlm2-chat-20B': 'InternLM2-chat-20B',
+          'internlm2-base-20B': 'InternLM2-base-20B',
         }
         return names[cellValue] || cellValue;
       },

@@ -2,6 +2,18 @@
 title: 最新动态
 # News
 news:
+  - title: InternLM2-math-20B大模型加入测评
+    date: 2024/03/12
+    link: /news
+
+  - title: InternLM2-chat-20B大模型加入测评
+    date: 2024/03/12
+    link: /news
+
+  - title: InternLM2-base-20B大模型加入测评
+    date: 2024/03/12
+    link: /news
+
   - title: Qwen-72B-Chat大模型加入测评
     date: 2024/03/06
     link: /news
