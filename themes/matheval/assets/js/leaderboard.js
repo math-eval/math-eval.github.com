@@ -316,6 +316,9 @@ import testCountData from "data/testCount.json";
           'internlm2-math-20B': 'InternLM2-math-20B',
           'internlm2-chat-20B': 'InternLM2-chat-20B',
           'internlm2-base-20B': 'InternLM2-base-20B',
+          'deepseek-math-7b-rl': 'DeepSeekMath-RL-7B',
+          'deepseek-math-7b-instruct': 'DeepSeekMath-Instruct-7B',
+          'deepseek-math-7b-base': 'DeepSeekMath-Base-7B',
         }
         return names[cellValue] || cellValue;
       },

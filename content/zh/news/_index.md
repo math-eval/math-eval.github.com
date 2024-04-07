@@ -2,6 +2,18 @@
 title: 最新动态
 # News
 news:
+  - title: DeepSeekMath-RL-7B大模型加入测评
+    date: 2024/03/26
+    link: /news
+
+  - title: DeepSeekMath-Instruct-7B大模型加入测评
+    date: 2024/03/26
+    link: /news
+  
+  - title: DeepSeekMath-Base-7B大模型加入测评
+    date: 2024/03/26
+    link: /news
+  
   - title: InternLM2-math-20B大模型加入测评
     date: 2024/03/12
     link: /news
