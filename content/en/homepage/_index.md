@@ -2,7 +2,7 @@
 # Banner
 banner:
   title: Evaluation of LLMs on math
-  content: MathEval is a benchmark dedicated to the holistic evaluation on mathematical capacities of LLMs, consisting of 19 evaluation datasets in various mathematical fields and nearly 30,000 math problems. The aim is to comprehensively evaluate the mathematical problem-solving abilities of LLMs in various grades and difficulties, including arithmetic, primary and secondary school competitions, and some advanced branches of mathematics. MathEval can not only serve as a one-stop reference for horizontal comparison of mathematical abilities among LLMs, but also provides hints and insights on how to further improve the mathematical abilities of LLMs in the future.
+  content: MathEval is a benchmark dedicated to the holistic evaluation on mathematical capacities of LLMs, consisting of 20 evaluation datasets in various mathematical fields and nearly 30,000 math problems. The aim is to comprehensively evaluate the mathematical problem-solving abilities of LLMs in various grades and difficulties, including arithmetic, primary and secondary school competitions, and some advanced branches of mathematics. MathEval can not only serve as a one-stop reference for horizontal comparison of mathematical abilities among LLMs, but also provides hints and insights on how to further improve the mathematical abilities of LLMs in the future.
   image: /images/banner.png
   button:
     enable: true
@@ -159,7 +159,7 @@ model:
 
 # Dataset
 dataset:
-  title: 19 specialized math evaluation datasets
+  title: 20 specialized math evaluation datasets
 
 # Contact
 contact:
