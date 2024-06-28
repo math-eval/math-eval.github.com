@@ -2,6 +2,66 @@
 title: News
 # News
 news:
+  - title: 2024高考数学测试集加入测评
+    date: 2024/06/24
+    link: /news
+
+  - title: Qwen2-72B-Instruct大模型加入测评
+    date: 2024/06/24
+    link: /news
+
+  - title: Qwen2-72B大模型加入测评
+    date: 2024/06/24
+    link: /news
+
+  - title: Qwen2-57B-A14B-Instruct大模型加入测评
+    date: 2024/06/24
+    link: /news
+
+  - title: Qwen2-7B-Instruct大模型加入测评
+    date: 2024/06/24
+    link: /news
+
+  - title: Qwen2-7B大模型加入测评
+    date: 2024/06/24
+    link: /news
+  
+  - title: Qwen15-72B大模型加入测评
+    date: 2024/06/07
+    link: /news
+
+  - title: Qwen15-72B-Chat大模型加入测评
+    date: 2024/06/07
+    link: /news
+
+  - title: Qwen15-110B大模型加入测评
+    date: 2024/06/07
+    link: /news
+
+  - title: Qwen15-110B-Chat大模型加入测评
+    date: 2024/06/07
+    link: /news
+
+  - title: Qwen15-7B-Chat大模型加入测评
+    date: 2024/06/07
+    link: /news
+
+  - title: Qwen15-7B大模型加入测评
+    date: 2024/06/07
+    link: /news
+
+  - title: Llama-3-8B大模型加入测评
+    date: 2024/06/07
+    link: /news
+  
+  - title: LLama-3-8B-Instruct大模型加入测评
+    date: 2024/06/07
+    link: /news
+
+  - title: LLama-3-70B-Instruct大模型加入测评
+    date: 2024/06/07
+    link: /news
+
   - title: DeepSeekMath-RL-7B大模型加入测评
     date: 2024/03/26
     link: /news
