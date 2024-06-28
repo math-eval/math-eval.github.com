@@ -15,7 +15,7 @@ filter_grade_name: Grade
 filter_grade_json: '[{name: "All", value: "all"}, {name: "Primary school", value: "primary"}, {name: "Middle school", value: "middle"}, {name: "High school and above", value: "high"}]'
 
 filter_quick_view_name: New questions
-filter_quick_view_json: '[{name: "GAOKAO(2023)", value: "gaokao-2023"}]'
+filter_quick_view_json: '[{name: "GAOKAO(2024)", value: "gaokao-2024"}, {name: "GAOKAO(2023)", value: "gaokao-2023"}]'
 
 evaluation_settings_name: Settings
 evaluation_settings_content: Evaluation Experiment Settings

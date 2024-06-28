@@ -44,7 +44,7 @@
   translation: 模型
 
 - id: leaderboard_date
-  translation: 测评日期
+  translation: 模型版本日期
 
 - id: leaderboard_params
   translation: 参数量

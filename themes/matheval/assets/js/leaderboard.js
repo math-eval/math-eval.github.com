@@ -60,6 +60,7 @@ import testCountData from "data/testCount.json";
     { field: 'scq_ch', title: 'TAL-SCQ5K-CN', width: 140, align: 'center', sortable: true, visible: true },
     { field: 'mawps', title: 'MAWPS', width: 80, align: 'center', sortable: true, visible: true },
     { field: 'GAOKAO-BENCH', title: 'GAOKAO(Math)', width: 140, align: 'center', sortable: true, visible: true },
+    { field: 'gaokao-2024', title: 'GAOKAO(2024)', width: 140, align: 'center', sortable: true, visible: true },
     { field: 'gaokao-2023', title: 'GAOKAO(2023)', width: 140, align: 'center', sortable: true, visible: true },
     { field: 'asdiv-a', title: 'ASDiv-A', width: 80, align: 'center', sortable: true, visible: true },
     { field: 'cmmlu', title: 'CMMLU(Math)', width: 130, align: 'center', sortable: true, visible: true },
@@ -78,11 +79,11 @@ import testCountData from "data/testCount.json";
   ]
   const filterConfig = {
     // 中文数据集
-    cn: ['scq_ch', 'GAOKAO-BENCH', 'gaokao-2023', 'cmmlu', 'math23k', 'ape210k', 'BBH', 'AGIEval', 'arith_std', 'math401'],
+    cn: ['scq_ch', 'GAOKAO-BENCH', 'gaokao-2024', 'gaokao-2023', 'cmmlu', 'math23k', 'ape210k', 'BBH', 'AGIEval', 'arith_std', 'math401'],
     // 英文数据集
     en: ['GSM8K', 'math', 'mmlu', 'svamp', 'math401', 'dolphin1878', 'scq_en', 'mawps', 'asdiv-a', 'MathQA', 'BBH', 'arith_std'],
     // 应用题
-    math_world_problems: ['GSM8K', 'math', 'mmlu', 'svamp', 'dolphin1878', 'scq_en', 'scq_ch', 'mawps', 'GAOKAO-BENCH', 'gaokao-2023', 'asdiv-a', 'cmmlu', 'MathQA', 'math23k', 'ape210k', 'AGIEval'],
+    math_world_problems: ['GSM8K', 'math', 'mmlu', 'svamp', 'dolphin1878', 'scq_en', 'scq_ch', 'mawps', 'GAOKAO-BENCH', 'gaokao-2024', 'gaokao-2023', 'asdiv-a', 'cmmlu', 'MathQA', 'math23k', 'ape210k', 'AGIEval'],
     // 算术
     arithmetics: ['math401', 'BBH', 'arith_std'],
     // 小学
@@ -90,7 +91,7 @@ import testCountData from "data/testCount.json";
     // 初中
     middle: ['arith_std'],
     // 高中及以上
-    high: ['AGIEval', 'cmmlu', 'GAOKAO-BENCH', 'mmlu', 'math', 'gaokao-2023'],
+    high: ['AGIEval', 'cmmlu', 'GAOKAO-BENCH', 'mmlu', 'math', 'gaokao-2024', 'gaokao-2023'],
   }
 
   const { createApp } = Vue

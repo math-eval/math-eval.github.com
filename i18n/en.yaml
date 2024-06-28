@@ -44,7 +44,7 @@
   translation: Model
 
 - id: leaderboard_date
-  translation: Date
+  translation: Model version date
 
 - id: leaderboard_params
   translation: Parameters

@@ -15,7 +15,7 @@ filter_grade_name: 学段维度
 filter_grade_json: '[{name: "全部", value: "all"}, {name: "小学", value: "primary"}, {name: "初中", value: "middle"}, {name: "高中及以上", value: "high"}]'
 
 filter_quick_view_name: 最新试题
-filter_quick_view_json: '[{name: "2023高考", value: "gaokao-2023"}]'
+filter_quick_view_json: '[{name: "2024高考", value: "gaokao-2024"}, {name: "2023高考", value: "gaokao-2023"}]'
 
 evaluation_settings_name: 设置说明
 evaluation_settings_content: 测评实验设置
